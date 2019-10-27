@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.AuditSchoolMapper">
+  <resultMap id="BaseResultMap" type="com.jks.entity.AuditSchool">
+   
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="Admcode" jdbcType="VARCHAR" property="admcode" />
+    <result column="Auditcode" jdbcType="VARCHAR" property="auditcode" />
+    <result column="SchoolName" jdbcType="VARCHAR" property="schoolname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+   
+    ID, Admcode, Auditcode, SchoolName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+   
+    select 
+    <include refid="Base_Column_List" />
+    from auditschool
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAdmByAudit" parameterType="java.lang.String" resultType="java.lang.String"> 
+    select 
+    Admcode
+    from auditschool
+    where Auditcode=#{auditcode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+   
+    delete from auditschool
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jks.entity.AuditSchool">
+   
+    insert into auditschool (ID, Admcode, Auditcode, 
+      SchoolName)
+    values (#{id,jdbcType=INTEGER}, #{admcode,jdbcType=VARCHAR}, #{auditcode,jdbcType=VARCHAR}, 
+      #{schoolname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jks.entity.AuditSchool">
+   
+    insert into auditschool
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="admcode != null">
+        Admcode,
+      </if>
+      <if test="auditcode != null">
+        Auditcode,
+      </if>
+      <if test="schoolname != null">
+        SchoolName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="admcode != null">
+        #{admcode,jdbcType=VARCHAR},
+      </if>
+      <if test="auditcode != null">
+        #{auditcode,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolname != null">
+        #{schoolname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jks.entity.AuditSchool">
+    
+    update auditschool
+    <set>
+      <if test="admcode != null">
+        Admcode = #{admcode,jdbcType=VARCHAR},
+      </if>
+      <if test="auditcode != null">
+        Auditcode = #{auditcode,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolname != null">
+        SchoolName = #{schoolname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jks.entity.AuditSchool">
+   
+    update auditschool
+    set Admcode = #{admcode,jdbcType=VARCHAR},
+      Auditcode = #{auditcode,jdbcType=VARCHAR},
+      SchoolName = #{schoolname,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

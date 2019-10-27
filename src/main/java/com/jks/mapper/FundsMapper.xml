@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.FundsDao">
+	
+	<select id="getFundsList"  resultType="Funds" parameterType="java.lang.String">
+		SELECT * FROM funds  WHERE 1 = 1
+		 <if test="year != null and year != ''">
+           AND `Year` = #{year}
+         </if>
+         <if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+         </if>
+	</select>
+	
+	<insert id="saveFunds" parameterType="Funds">
+	 	INSERT INTO funds
+	 	(
+	 	 Admcode,
+	 	 Year,
+	 	 city,
+	 	 CenterFund,
+	 	 LocalFund,
+	 	 Debt,
+	 	 Loan,
+	 	 Appropriation,
+	 	 TeacInputRadio,
+	 	 TeachChange,
+	 	 FundBudget,
+	 	 Audit
+	 	 ) 
+	 	VALUES
+	 	(
+	 	#{admcode},
+		#{year},
+		#{city},
+	 	#{centerFund},
+	 	#{localFund},
+	 	#{debt},
+	 	#{loan},
+	 	#{appropriation},
+	 	#{teacInputRadio},
+	 	#{teachChange},
+	 	#{fundBudget},
+	    0 
+	 	) 
+	</insert>
+	
+	<delete id="deleteFunds" parameterType="Funds">
+		DELETE FROM funds WHERE id=#{id}
+	</delete>
+	
+	<select id="findById" parameterType="int" resultType="Funds">    
+        select * from funds where id=#{id}    
+    </select> 
+	
+	<update id="updateFunds" parameterType="Funds">			
+		UPDATE funds SET 
+		 Year=#{year},
+	 	 CenterFund=#{centerFund},
+	 	 LocalFund=#{localFund},
+	 	 Debt=#{debt},
+	 	 Loan=#{loan},
+	 	 Appropriation=#{appropriation},
+	 	 TeacInputRadio=#{teacInputRadio},
+	 	 TeachChange=#{teachChange},
+	 	 FundBudget=#{fundBudget}
+		WHERE id=#{id}
+	</update>  
+	
+	<update id="updateAudit" parameterType="int">
+		UPDATE funds SET 
+	 	 Audit=1
+		WHERE id=#{id}
+	</update> 
+	
+	<select id="findByCity"  resultType="Funds" parameterType="java.lang.String">
+		SELECT * FROM funds WHERE 
+		City LIKE CONCAT('%','${city}','%' ) 
+		<if test="year != null and year != ''">
+           AND `Year` = #{year}
+        </if>
+    </select> 
+    
+     <select id="checkYear" parameterType="Funds" resultType="java.lang.Integer">
+		select count(*) from funds where Year=#{year} and Admcode=#{admcode}
+	</select> 
+	
+</mapper>

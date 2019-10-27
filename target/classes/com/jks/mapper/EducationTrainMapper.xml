@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.EducationTrainDao">
+	
+	<select id="getEducationTrainList"  resultType="EducationTrain" parameterType="java.lang.String">
+		SELECT * FROM educationtrain  WHERE 1 = 1
+		 <if test="year != null and year != ''">
+           AND `Year` = #{year}
+         </if>
+         <if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+         </if>
+	</select>
+	
+	<insert id="saveEducationTrain" parameterType="EducationTrain">
+	 	INSERT INTO educationtrain
+	 	(
+	 	 Admcode,
+		 Year, 
+         City,
+	 	 DistTrainFullTea,
+	 	 DistTrainHour,
+	 	 CityTrainFullTea,
+	 	 CityTrainHour,
+	 	 ProvinTrainFullTea,
+	 	 ProvinTrainHour,
+	 	 StateTrainFullTea,
+	 	 StateTrainHour,
+	 	 StateOuterTrain,
+	 	 StateOuterHour,
+	 	 AbroadTrain,
+	 	 AbroadHour,
+	 	 Diploma,
+	 	 TainFundPer,
+	 	 StateSkillWinTime,
+	 	 StateFirstAward,
+	 	 StateSecondAward,
+	 	 StateThridAward,
+	 	 ProvinSkillWinTime,
+	 	 ProvinFirstAward,
+	 	 ProvinSecondAward,
+	 	 ProvinThirdAward,
+	 	 CitySkillWinTime,
+	 	 CityFirstAward,
+	 	 CitySecondAward,
+	 	 CityThirdAward,
+	 	 Audit
+	 	 ) 
+	 	VALUES
+	 	(
+	 	#{admcode},
+		#{year},
+		#{city},
+	 	#{distTrainFullTea},
+	 	#{distTrainHour},
+	 	#{cityTrainFullTea},
+	 	#{cityTrainHour},
+	 	#{provinTrainFullTea},
+	 	#{provinTrainHour},
+	 	#{stateTrainFullTea},
+	 	#{stateTrainHour},
+	 	#{stateOuterTrain},
+	 	#{stateOuterHour},
+	 	#{abroadTrain},
+	 	#{abroadHour},
+	 	#{diploma},
+	 	#{tainFundPer},
+	 	#{stateSkillWinTime},
+	 	#{stateFirstAward},
+	 	#{stateSecondAward},
+	 	#{stateThridAward},
+	 	#{provinSkillWinTime},
+	 	#{provinFirstAward},
+	 	#{provinSecondAward},
+	 	#{provinThirdAward},
+	 	#{citySkillWinTime},
+	 	#{cityFirstAward},
+	 	#{citySecondAward},
+	 	#{cityThirdAward},
+	 	0
+	 	) 
+	</insert>
+	
+	<delete id="deleteEducationTrain" parameterType="EducationTrain">
+		DELETE FROM educationtrain WHERE id=#{id}
+	</delete>
+	
+	<select id="findById" parameterType="int" resultType="EducationTrain">    
+        select * from educationtrain where id=#{id}    
+    </select> 
+	
+	<update id="updateEducationTrain" parameterType="EducationTrain">
+		UPDATE educationtrain SET 
+		 Year=#{year},
+	 	 DistTrainFullTea=#{distTrainFullTea},
+	 	 DistTrainHour=#{distTrainHour},
+	 	 CityTrainFullTea=#{cityTrainFullTea},
+	 	 CityTrainHour=#{cityTrainHour},
+	 	 ProvinTrainFullTea=#{provinTrainFullTea},
+	 	 ProvinTrainHour=#{provinTrainHour},
+	 	 StateTrainFullTea=#{stateTrainFullTea},
+	 	 StateTrainHour=#{stateTrainHour},
+	 	 StateOuterTrain=#{stateOuterTrain},
+	 	 StateOuterHour=#{stateOuterHour},
+	 	 AbroadTrain=#{abroadTrain},
+	 	 AbroadHour=#{abroadHour},
+	 	 Diploma=#{diploma},
+	 	 TainFundPer=#{tainFundPer},
+	 	 StateSkillWinTime=#{stateSkillWinTime},
+	 	 StateFirstAward=#{stateFirstAward},
+	 	 StateSecondAward=#{stateSecondAward},
+	 	 StateThridAward=#{stateThridAward},
+	 	 ProvinSkillWinTime=#{provinSkillWinTime},
+	 	 ProvinFirstAward=#{provinFirstAward},
+	 	 ProvinSecondAward=#{provinSecondAward},
+	 	 ProvinThirdAward=#{provinThirdAward},
+	 	 CitySkillWinTime=#{citySkillWinTime},
+	 	 CityFirstAward=#{cityFirstAward},
+	 	 CitySecondAward=#{citySecondAward},
+	 	 CityThirdAward=#{cityThirdAward}
+		WHERE id=#{id}
+	</update> 
+	
+	<update id="updateAudit" parameterType="int">
+		UPDATE educationtrain SET 
+	 	 Audit=1
+		WHERE id=#{id}
+	</update> 
+	
+	<select id="findByCity"  resultType="EducationTrain" parameterType="java.lang.String">
+		SELECT * FROM educationtrain WHERE 
+		City LIKE CONCAT('%','${city}','%' ) 
+		<if test="year != null and year != ''">
+           AND `Year` = #{year}
+        </if>
+    </select>
+    
+    <select id="checkYear" parameterType="EducationTrain" resultType="java.lang.Integer">
+		select count(*) from educationtrain where Year=#{year} and Admcode=#{admcode}
+	</select> 
+	
+</mapper>

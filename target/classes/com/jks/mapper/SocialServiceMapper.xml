@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.SocialServiceMapper">
+  <resultMap id="BaseResultMap" type="com.jks.entity.SocialService">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="Admcode" jdbcType="VARCHAR" property="admcode" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="City" jdbcType="VARCHAR" property="city" />
+    <result column="TrainStaff" jdbcType="REAL" property="trainstaff" />
+    <result column="TrainUnabled" jdbcType="REAL" property="trainunabled" />
+    <result column="TrainUnemStaff" jdbcType="REAL" property="trainunemstaff" />
+    <result column="TrainFarmer" jdbcType="REAL" property="trainfarmer" />
+    <result column="TrainRetireSoldier" jdbcType="REAL" property="trainretiresoldier" />
+    <result column="SkillIdentNum" jdbcType="DECIMAL" property="skillidentnum" />
+    <result column="TeachServe" jdbcType="DECIMAL" property="teachserve" />
+    <result column="Audit" jdbcType="INTEGER" property="audit" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, Admcode, Year, City, TrainStaff, TrainUnabled, TrainUnemStaff, TrainFarmer, TrainRetireSoldier, 
+    SkillIdentNum, TeachServe, Audit
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from socialservice
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="query" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from socialservice where 1=1
+		<if test="year!= null">and year=#{year,jdbcType=VARCHAR}</if>
+		<if test="admcode!= null">and admcode=#{admcode,jdbcType=VARCHAR}</if>
+		<if test="city!= null">and city like #{city,jdbcType=VARCHAR}</if>
+		<if test="audit!= null">and audit=#{audit,jdbcType=INTEGER}</if>
+	</select>
+	<select id="selectAdmcodeByCity" parameterType="java.lang.String" resultType="java.lang.String">
+		select Admcode 
+		from socialservice
+		where city like #{city,jdbcType=VARCHAR}
+	</select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from socialservice
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jks.entity.SocialService">
+    insert into socialservice (ID, Admcode, Year, 
+      City, TrainStaff, TrainUnabled, 
+      TrainUnemStaff, TrainFarmer, TrainRetireSoldier, 
+      SkillIdentNum, TeachServe, Audit
+      )
+    values (#{id,jdbcType=INTEGER}, #{admcode,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{trainstaff,jdbcType=REAL}, #{trainunabled,jdbcType=REAL}, 
+      #{trainunemstaff,jdbcType=REAL}, #{trainfarmer,jdbcType=REAL}, #{trainretiresoldier,jdbcType=REAL}, 
+      #{skillidentnum,jdbcType=DECIMAL}, #{teachserve,jdbcType=DECIMAL}, #{audit,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jks.entity.SocialService">
+    insert into socialservice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="admcode != null">
+        Admcode,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="city != null">
+        City,
+      </if>
+      <if test="trainstaff != null">
+        TrainStaff,
+      </if>
+      <if test="trainunabled != null">
+        TrainUnabled,
+      </if>
+      <if test="trainunemstaff != null">
+        TrainUnemStaff,
+      </if>
+      <if test="trainfarmer != null">
+        TrainFarmer,
+      </if>
+      <if test="trainretiresoldier != null">
+        TrainRetireSoldier,
+      </if>
+      <if test="skillidentnum != null">
+        SkillIdentNum,
+      </if>
+      <if test="teachserve != null">
+        TeachServe,
+      </if>
+      <if test="audit != null">
+        Audit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="admcode != null">
+        #{admcode,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="trainstaff != null">
+        #{trainstaff,jdbcType=REAL},
+      </if>
+      <if test="trainunabled != null">
+        #{trainunabled,jdbcType=REAL},
+      </if>
+      <if test="trainunemstaff != null">
+        #{trainunemstaff,jdbcType=REAL},
+      </if>
+      <if test="trainfarmer != null">
+        #{trainfarmer,jdbcType=REAL},
+      </if>
+      <if test="trainretiresoldier != null">
+        #{trainretiresoldier,jdbcType=REAL},
+      </if>
+      <if test="skillidentnum != null">
+        #{skillidentnum,jdbcType=DECIMAL},
+      </if>
+      <if test="teachserve != null">
+        #{teachserve,jdbcType=DECIMAL},
+      </if>
+      <if test="audit != null">
+        #{audit,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jks.entity.SocialService">
+    update socialservice
+    <set>
+      <if test="admcode != null">
+        Admcode = #{admcode,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        City = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="trainstaff != null">
+        TrainStaff = #{trainstaff,jdbcType=REAL},
+      </if>
+      <if test="trainunabled != null">
+        TrainUnabled = #{trainunabled,jdbcType=REAL},
+      </if>
+      <if test="trainunemstaff != null">
+        TrainUnemStaff = #{trainunemstaff,jdbcType=REAL},
+      </if>
+      <if test="trainfarmer != null">
+        TrainFarmer = #{trainfarmer,jdbcType=REAL},
+      </if>
+      <if test="trainretiresoldier != null">
+        TrainRetireSoldier = #{trainretiresoldier,jdbcType=REAL},
+      </if>
+      <if test="skillidentnum != null">
+        SkillIdentNum = #{skillidentnum,jdbcType=DECIMAL},
+      </if>
+      <if test="teachserve != null">
+        TeachServe = #{teachserve,jdbcType=DECIMAL},
+      </if>
+      <if test="audit != null">
+        Audit = #{audit,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jks.entity.SocialService">
+    update socialservice
+    set Admcode = #{admcode,jdbcType=VARCHAR},
+      Year = #{year,jdbcType=VARCHAR},
+      City = #{city,jdbcType=VARCHAR},
+      TrainStaff = #{trainstaff,jdbcType=REAL},
+      TrainUnabled = #{trainunabled,jdbcType=REAL},
+      TrainUnemStaff = #{trainunemstaff,jdbcType=REAL},
+      TrainFarmer = #{trainfarmer,jdbcType=REAL},
+      TrainRetireSoldier = #{trainretiresoldier,jdbcType=REAL},
+      SkillIdentNum = #{skillidentnum,jdbcType=DECIMAL},
+      TeachServe = #{teachserve,jdbcType=DECIMAL},
+      Audit = #{audit,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

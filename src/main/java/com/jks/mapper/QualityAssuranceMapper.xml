@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.QualityAssuranceDao">
+	
+	<select id="getQualityAssuranceList"  resultType="QualityAssurance" parameterType="java.lang.String">
+		SELECT * FROM qualityassure WHERE 1 = 1
+		 <if test="year != null and year != ''">
+           AND `Year` = #{year}
+         </if>
+         <if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+         </if>
+	</select>
+	
+	<insert id="saveQualityAssurance" parameterType="QualityAssurance">
+	 	INSERT INTO qualityassure
+	 	(
+	 	 Admcode,
+	 	 Year,
+	 	 City,
+	 	 LeaderListen,
+	 	 LeaderTalk,
+	 	 SchoolWell,
+	 	 SchoolGood,
+	 	 SchoolBad,
+	 	 StateClass,
+	 	 ProvinClass,
+	 	 CityClass,
+	 	 Chinese,
+	 	 Math,
+	 	 English,
+	 	 StateSkillWinTime,
+	 	 StateFirstAward,
+	 	 StateSecondAward,
+	 	 StateThridAward,
+	 	 ProvinSkillWinTime,
+	 	 ProvinFirstAward,
+	 	 ProvinSecondAward,
+	 	 ProvinThirdAward,
+	 	 CitySkillWinTime,
+	 	 CityFirstAward,
+	 	 CitySecondAward,
+	 	 CityThirdAward,
+	 	 Audit
+	 	 ) 
+	 	VALUES
+	 	(
+	 	#{admcode},
+	 	#{year},
+	 	#{city},
+	 	#{leaderListen},
+	 	#{leaderTalk},
+	 	#{schoolWell},
+	 	#{schoolGood},
+	 	#{schoolBad},
+	 	#{stateClass},
+	 	#{provinClass},
+	 	#{cityClass},
+	 	#{chinese},
+	 	#{math},
+	 	#{english},
+	 	#{stateSkillWinTime},
+	 	#{stateFirstAward},
+	 	#{stateSecondAward},
+	 	#{stateThridAward},
+	 	#{provinSkillWinTime},
+	 	#{provinFirstAward},
+	 	#{provinSecondAward},
+	 	#{provinThirdAward},
+	 	#{citySkillWinTime},
+	 	#{cityFirstAward},
+	 	#{citySecondAward},
+	 	#{cityThirdAward},
+	 	0
+	 	) 
+	</insert>
+	
+    <delete id="deleteQualityAssurance" parameterType="QualityAssurance">
+		DELETE FROM qualityassure WHERE id=#{id}
+	</delete>
+	
+	<select id="findById" parameterType="int" resultType="QualityAssurance">    
+        select * from qualityassure where id=#{id}    
+    </select> 
+	
+	<update id="updateQualityAssurance" parameterType="QualityAssurance">
+		UPDATE qualityassure SET 
+		 Year=#{year},
+	 	 LeaderListen=#{leaderListen},
+	 	 LeaderTalk=#{leaderTalk},
+	 	 SchoolWell=#{schoolWell},
+	 	 SchoolGood=#{schoolGood},
+	 	 SchoolBad=#{schoolBad},
+	 	 StateClass=#{stateClass},
+	 	 ProvinClass=#{provinClass},
+	 	 CityClass=#{cityClass},
+	 	 Chinese=#{chinese},
+	 	 Math=#{math},
+	 	 English=#{english},
+	 	 StateSkillWinTime=#{stateSkillWinTime},
+	 	 StateFirstAward=#{stateFirstAward},
+	 	 StateSecondAward=#{stateSecondAward},
+	 	 StateThridAward=#{stateThridAward},
+	 	 ProvinSkillWinTime=#{provinSkillWinTime},
+	 	 ProvinFirstAward=#{provinFirstAward},
+	 	 ProvinSecondAward=#{provinSecondAward},
+	 	 ProvinThirdAward=#{provinThirdAward},
+	 	 CitySkillWinTime=#{citySkillWinTime},
+	 	 CityFirstAward=#{cityFirstAward},
+	 	 CitySecondAward=#{citySecondAward},
+	 	 CityThirdAward=#{cityThirdAward}
+		WHERE id=#{id}
+	</update> 
+	
+	<update id="updateAudit" parameterType="int">
+		UPDATE qualityassure SET 
+	 	 Audit=1
+		WHERE id=#{id}
+	</update> 
+	
+	<select id="findByCity"  resultType="QualityAssurance" parameterType="java.lang.String">
+		SELECT * FROM qualityassure WHERE 
+		City LIKE CONCAT('%','${city}','%' ) 
+		<if test="year != null and year != ''">
+           AND `Year` = #{year}
+        </if>
+    </select> 
+    
+    <select id="checkYear" parameterType="QualityAssurance" resultType="java.lang.Integer">
+		select count(*) from qualityassure where Year=#{year} and Admcode=#{admcode}
+	</select>
+</mapper>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.MajorMapper">
+  <resultMap id="BaseResultMap" type="com.jks.entity.Major">
+    <id column="MajorCode" jdbcType="VARCHAR" property="majorcode" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="InduName" jdbcType="VARCHAR" property="induname" />
+    <result column="Skill" jdbcType="VARCHAR" property="skill" />
+    <result column="Occupation" jdbcType="VARCHAR" property="occupation" />
+    <result column="Duration" jdbcType="VARCHAR" property="duration" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    MajorCode, Name, InduName, Skill, Occupation, Duration
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from major
+    where MajorCode = #{majorcode,jdbcType=VARCHAR}
+  </select>
+  <select id="query" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from major where 1=1
+		<if test="majorcode!= null">and majorcode=#{majorcode,jdbcType=VARCHAR}</if>
+	</select>
+	 <select id="selectCodeByName" parameterType="java.lang.String" resultType="java.lang.String">
+    select MajorCode from major
+    where Name = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from major
+    where MajorCode = #{majorcode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jks.entity.Major">
+    insert into major (MajorCode, Name, InduName, 
+      Skill, Occupation, Duration
+      )
+    values (#{majorcode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{induname,jdbcType=VARCHAR}, 
+      #{skill,jdbcType=VARCHAR}, #{occupation,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jks.entity.Major">
+    insert into major
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="majorcode != null">
+        MajorCode,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="induname != null">
+        InduName,
+      </if>
+      <if test="skill != null">
+        Skill,
+      </if>
+      <if test="occupation != null">
+        Occupation,
+      </if>
+      <if test="duration != null">
+        Duration,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="majorcode != null">
+        #{majorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="induname != null">
+        #{induname,jdbcType=VARCHAR},
+      </if>
+      <if test="skill != null">
+        #{skill,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null">
+        #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jks.entity.Major">
+    update major
+    <set>
+      <if test="name != null">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="induname != null">
+        InduName = #{induname,jdbcType=VARCHAR},
+      </if>
+      <if test="skill != null">
+        Skill = #{skill,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null">
+        Occupation = #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        Duration = #{duration,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MajorCode = #{majorcode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jks.entity.Major">
+    update major
+    set Name = #{name,jdbcType=VARCHAR},
+      InduName = #{induname,jdbcType=VARCHAR},
+      Skill = #{skill,jdbcType=VARCHAR},
+      Occupation = #{occupation,jdbcType=VARCHAR},
+      Duration = #{duration,jdbcType=VARCHAR}
+    where MajorCode = #{majorcode,jdbcType=VARCHAR}
+  </update>
+</mapper>

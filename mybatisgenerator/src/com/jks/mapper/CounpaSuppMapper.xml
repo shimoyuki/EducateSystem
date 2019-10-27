@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.CounpaSuppMapper">
+  <resultMap id="BaseResultMap" type="com.jks.entity.CounpaSupp">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="Admcode" jdbcType="VARCHAR" property="admcode" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="City" jdbcType="VARCHAR" property="city" />
+    <result column="HelpObject" jdbcType="REAL" property="helpobject" />
+    <result column="PoverReducTarget" jdbcType="REAL" property="poverreductarget" />
+    <result column="Fund" jdbcType="DECIMAL" property="fund" />
+    <result column="ServiceNum" jdbcType="REAL" property="servicenum" />
+    <result column="Audit" jdbcType="INTEGER" property="audit" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, Admcode, Year, City, HelpObject, PoverReducTarget, Fund, ServiceNum, Audit
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from counpasupp
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="query" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from counpasupp where 1=1
+		<if test="year!= null">and year=#{year,jdbcType=VARCHAR}</if>
+		<if test="admcode!= null">and admcode=#{admcode,jdbcType=VARCHAR}</if>
+		<if test="city!= null">and city like #{city,jdbcType=VARCHAR}</if>
+		<if test="audit!= null">and audit=#{audit,jdbcType=INTEGER}</if>
+	</select>
+	<select id="selectAdmcodeByCity" parameterType="java.lang.String" resultType="java.lang.String">
+		select Admcode 
+		from counpasupp
+		where city like #{city,jdbcType=VARCHAR}
+	</select>
+	<select id="selectYear" parameterType="java.lang.String" resultType="java.lang.String">
+		select distinct Year 
+		from counpasupp
+		<if test="city!= null">where city like #{city,jdbcType=VARCHAR}</if>
+		order by year
+	</select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from counpasupp
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jks.entity.CounpaSupp">
+    insert into counpasupp (ID, Admcode, Year, 
+      City, HelpObject, PoverReducTarget, 
+      Fund, ServiceNum, Audit
+      )
+    values (#{id,jdbcType=INTEGER}, #{admcode,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{helpobject,jdbcType=REAL}, #{poverreductarget,jdbcType=REAL}, 
+      #{fund,jdbcType=DECIMAL}, #{servicenum,jdbcType=REAL}, #{audit,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jks.entity.CounpaSupp">
+    insert into counpasupp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="admcode != null">
+        Admcode,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="city != null">
+        City,
+      </if>
+      <if test="helpobject != null">
+        HelpObject,
+      </if>
+      <if test="poverreductarget != null">
+        PoverReducTarget,
+      </if>
+      <if test="fund != null">
+        Fund,
+      </if>
+      <if test="servicenum != null">
+        ServiceNum,
+      </if>
+      <if test="audit != null">
+        Audit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="admcode != null">
+        #{admcode,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="helpobject != null">
+        #{helpobject,jdbcType=REAL},
+      </if>
+      <if test="poverreductarget != null">
+        #{poverreductarget,jdbcType=REAL},
+      </if>
+      <if test="fund != null">
+        #{fund,jdbcType=DECIMAL},
+      </if>
+      <if test="servicenum != null">
+        #{servicenum,jdbcType=REAL},
+      </if>
+      <if test="audit != null">
+        #{audit,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jks.entity.CounpaSupp">
+    update counpasupp
+    <set>
+      <if test="admcode != null">
+        Admcode = #{admcode,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        City = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="helpobject != null">
+        HelpObject = #{helpobject,jdbcType=REAL},
+      </if>
+      <if test="poverreductarget != null">
+        PoverReducTarget = #{poverreductarget,jdbcType=REAL},
+      </if>
+      <if test="fund != null">
+        Fund = #{fund,jdbcType=DECIMAL},
+      </if>
+      <if test="servicenum != null">
+        ServiceNum = #{servicenum,jdbcType=REAL},
+      </if>
+      <if test="audit != null">
+        Audit = #{audit,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jks.entity.CounpaSupp">
+    update counpasupp
+    set Admcode = #{admcode,jdbcType=VARCHAR},
+      Year = #{year,jdbcType=VARCHAR},
+      City = #{city,jdbcType=VARCHAR},
+      HelpObject = #{helpobject,jdbcType=REAL},
+      PoverReducTarget = #{poverreductarget,jdbcType=REAL},
+      Fund = #{fund,jdbcType=DECIMAL},
+      ServiceNum = #{servicenum,jdbcType=REAL},
+      Audit = #{audit,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

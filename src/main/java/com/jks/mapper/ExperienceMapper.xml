@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.ExperienceMapper">
+  <resultMap id="BaseResultMap" type="com.jks.entity.Experience">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="Admcode" jdbcType="VARCHAR" property="admcode" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="City" jdbcType="VARCHAR" property="city" />
+    <result column="TheoryBest" jdbcType="VARCHAR" property="theorybest" />
+    <result column="TheoryGood" jdbcType="VARCHAR" property="theorygood" />
+    <result column="TheoryBad" jdbcType="VARCHAR" property="theorybad" />
+    <result column="MajorBest" jdbcType="VARCHAR" property="majorbest" />
+    <result column="MajorGood" jdbcType="VARCHAR" property="majorgood" />
+    <result column="MajorBad" jdbcType="VARCHAR" property="majorbad" />
+    <result column="InternshipBest" jdbcType="VARCHAR" property="internshipbest" />
+    <result column="InternshipGood" jdbcType="VARCHAR" property="internshipgood" />
+    <result column="InternshipBad" jdbcType="VARCHAR" property="internshipbad" />
+    <result column="CampusBest" jdbcType="VARCHAR" property="campusbest" />
+    <result column="CampusGood" jdbcType="VARCHAR" property="campusgood" />
+    <result column="CampusBad" jdbcType="VARCHAR" property="campusbad" />
+    <result column="LifeBest" jdbcType="VARCHAR" property="lifebest" />
+    <result column="LifeGood" jdbcType="VARCHAR" property="lifegood" />
+    <result column="LifeBad" jdbcType="VARCHAR" property="lifebad" />
+    <result column="SafetyBest" jdbcType="VARCHAR" property="safetybest" />
+    <result column="SafetyGood" jdbcType="VARCHAR" property="safetygood" />
+    <result column="SafetyBad" jdbcType="VARCHAR" property="safetybad" />
+    <result column="GraduateBest" jdbcType="VARCHAR" property="graduatebest" />
+    <result column="GraduateGood" jdbcType="VARCHAR" property="graduategood" />
+    <result column="GraduateBad" jdbcType="VARCHAR" property="graduatebad" />
+    <result column="Audit" jdbcType="INTEGER" property="audit" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, Admcode, Year, City, TheoryBest, TheoryGood, TheoryBad, MajorBest, MajorGood, 
+    MajorBad, InternshipBest, InternshipGood, InternshipBad, CampusBest, CampusGood, 
+    CampusBad, LifeBest, LifeGood, LifeBad, SafetyBest, SafetyGood, SafetyBad, GraduateBest, 
+    GraduateGood, GraduateBad, Audit
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from experience
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="query" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from experience where 1=1
+		<if test="year!= null">and year=#{year,jdbcType=VARCHAR}</if>
+		<if test="admcode!= null">and admcode=#{admcode,jdbcType=VARCHAR}</if>
+		<if test="city!= null">and city like #{city,jdbcType=VARCHAR}</if>
+		<if test="audit!= null">and audit=#{audit,jdbcType=INTEGER}</if>
+	</select>
+	<select id="selectAdmcodeByCity" parameterType="java.lang.String" resultType="java.lang.String">
+		select Admcode 
+		from experience
+		where city like #{city,jdbcType=VARCHAR}
+	</select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from experience
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jks.entity.Experience">
+    insert into experience (ID, Admcode, Year, 
+      City, TheoryBest, TheoryGood, 
+      TheoryBad, MajorBest, MajorGood, 
+      MajorBad, InternshipBest, InternshipGood, 
+      InternshipBad, CampusBest, CampusGood, 
+      CampusBad, LifeBest, LifeGood, 
+      LifeBad, SafetyBest, SafetyGood, 
+      SafetyBad, GraduateBest, GraduateGood, 
+      GraduateBad, Audit)
+    values (#{id,jdbcType=INTEGER}, #{admcode,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{theorybest,jdbcType=VARCHAR}, #{theorygood,jdbcType=VARCHAR}, 
+      #{theorybad,jdbcType=VARCHAR}, #{majorbest,jdbcType=VARCHAR}, #{majorgood,jdbcType=VARCHAR}, 
+      #{majorbad,jdbcType=VARCHAR}, #{internshipbest,jdbcType=VARCHAR}, #{internshipgood,jdbcType=VARCHAR}, 
+      #{internshipbad,jdbcType=VARCHAR}, #{campusbest,jdbcType=VARCHAR}, #{campusgood,jdbcType=VARCHAR}, 
+      #{campusbad,jdbcType=VARCHAR}, #{lifebest,jdbcType=VARCHAR}, #{lifegood,jdbcType=VARCHAR}, 
+      #{lifebad,jdbcType=VARCHAR}, #{safetybest,jdbcType=VARCHAR}, #{safetygood,jdbcType=VARCHAR}, 
+      #{safetybad,jdbcType=VARCHAR}, #{graduatebest,jdbcType=VARCHAR}, #{graduategood,jdbcType=VARCHAR}, 
+      #{graduatebad,jdbcType=VARCHAR}, #{audit,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jks.entity.Experience">
+    insert into experience
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="admcode != null">
+        Admcode,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="city != null">
+        City,
+      </if>
+      <if test="theorybest != null">
+        TheoryBest,
+      </if>
+      <if test="theorygood != null">
+        TheoryGood,
+      </if>
+      <if test="theorybad != null">
+        TheoryBad,
+      </if>
+      <if test="majorbest != null">
+        MajorBest,
+      </if>
+      <if test="majorgood != null">
+        MajorGood,
+      </if>
+      <if test="majorbad != null">
+        MajorBad,
+      </if>
+      <if test="internshipbest != null">
+        InternshipBest,
+      </if>
+      <if test="internshipgood != null">
+        InternshipGood,
+      </if>
+      <if test="internshipbad != null">
+        InternshipBad,
+      </if>
+      <if test="campusbest != null">
+        CampusBest,
+      </if>
+      <if test="campusgood != null">
+        CampusGood,
+      </if>
+      <if test="campusbad != null">
+        CampusBad,
+      </if>
+      <if test="lifebest != null">
+        LifeBest,
+      </if>
+      <if test="lifegood != null">
+        LifeGood,
+      </if>
+      <if test="lifebad != null">
+        LifeBad,
+      </if>
+      <if test="safetybest != null">
+        SafetyBest,
+      </if>
+      <if test="safetygood != null">
+        SafetyGood,
+      </if>
+      <if test="safetybad != null">
+        SafetyBad,
+      </if>
+      <if test="graduatebest != null">
+        GraduateBest,
+      </if>
+      <if test="graduategood != null">
+        GraduateGood,
+      </if>
+      <if test="graduatebad != null">
+        GraduateBad,
+      </if>
+      <if test="audit != null">
+        Audit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="admcode != null">
+        #{admcode,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="theorybest != null">
+        #{theorybest,jdbcType=VARCHAR},
+      </if>
+      <if test="theorygood != null">
+        #{theorygood,jdbcType=VARCHAR},
+      </if>
+      <if test="theorybad != null">
+        #{theorybad,jdbcType=VARCHAR},
+      </if>
+      <if test="majorbest != null">
+        #{majorbest,jdbcType=VARCHAR},
+      </if>
+      <if test="majorgood != null">
+        #{majorgood,jdbcType=VARCHAR},
+      </if>
+      <if test="majorbad != null">
+        #{majorbad,jdbcType=VARCHAR},
+      </if>
+      <if test="internshipbest != null">
+        #{internshipbest,jdbcType=VARCHAR},
+      </if>
+      <if test="internshipgood != null">
+        #{internshipgood,jdbcType=VARCHAR},
+      </if>
+      <if test="internshipbad != null">
+        #{internshipbad,jdbcType=VARCHAR},
+      </if>
+      <if test="campusbest != null">
+        #{campusbest,jdbcType=VARCHAR},
+      </if>
+      <if test="campusgood != null">
+        #{campusgood,jdbcType=VARCHAR},
+      </if>
+      <if test="campusbad != null">
+        #{campusbad,jdbcType=VARCHAR},
+      </if>
+      <if test="lifebest != null">
+        #{lifebest,jdbcType=VARCHAR},
+      </if>
+      <if test="lifegood != null">
+        #{lifegood,jdbcType=VARCHAR},
+      </if>
+      <if test="lifebad != null">
+        #{lifebad,jdbcType=VARCHAR},
+      </if>
+      <if test="safetybest != null">
+        #{safetybest,jdbcType=VARCHAR},
+      </if>
+      <if test="safetygood != null">
+        #{safetygood,jdbcType=VARCHAR},
+      </if>
+      <if test="safetybad != null">
+        #{safetybad,jdbcType=VARCHAR},
+      </if>
+      <if test="graduatebest != null">
+        #{graduatebest,jdbcType=VARCHAR},
+      </if>
+      <if test="graduategood != null">
+        #{graduategood,jdbcType=VARCHAR},
+      </if>
+      <if test="graduatebad != null">
+        #{graduatebad,jdbcType=VARCHAR},
+      </if>
+      <if test="audit != null">
+        #{audit,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jks.entity.Experience">
+    update experience
+    <set>
+      <if test="admcode != null">
+        Admcode = #{admcode,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        City = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="theorybest != null">
+        TheoryBest = #{theorybest,jdbcType=VARCHAR},
+      </if>
+      <if test="theorygood != null">
+        TheoryGood = #{theorygood,jdbcType=VARCHAR},
+      </if>
+      <if test="theorybad != null">
+        TheoryBad = #{theorybad,jdbcType=VARCHAR},
+      </if>
+      <if test="majorbest != null">
+        MajorBest = #{majorbest,jdbcType=VARCHAR},
+      </if>
+      <if test="majorgood != null">
+        MajorGood = #{majorgood,jdbcType=VARCHAR},
+      </if>
+      <if test="majorbad != null">
+        MajorBad = #{majorbad,jdbcType=VARCHAR},
+      </if>
+      <if test="internshipbest != null">
+        InternshipBest = #{internshipbest,jdbcType=VARCHAR},
+      </if>
+      <if test="internshipgood != null">
+        InternshipGood = #{internshipgood,jdbcType=VARCHAR},
+      </if>
+      <if test="internshipbad != null">
+        InternshipBad = #{internshipbad,jdbcType=VARCHAR},
+      </if>
+      <if test="campusbest != null">
+        CampusBest = #{campusbest,jdbcType=VARCHAR},
+      </if>
+      <if test="campusgood != null">
+        CampusGood = #{campusgood,jdbcType=VARCHAR},
+      </if>
+      <if test="campusbad != null">
+        CampusBad = #{campusbad,jdbcType=VARCHAR},
+      </if>
+      <if test="lifebest != null">
+        LifeBest = #{lifebest,jdbcType=VARCHAR},
+      </if>
+      <if test="lifegood != null">
+        LifeGood = #{lifegood,jdbcType=VARCHAR},
+      </if>
+      <if test="lifebad != null">
+        LifeBad = #{lifebad,jdbcType=VARCHAR},
+      </if>
+      <if test="safetybest != null">
+        SafetyBest = #{safetybest,jdbcType=VARCHAR},
+      </if>
+      <if test="safetygood != null">
+        SafetyGood = #{safetygood,jdbcType=VARCHAR},
+      </if>
+      <if test="safetybad != null">
+        SafetyBad = #{safetybad,jdbcType=VARCHAR},
+      </if>
+      <if test="graduatebest != null">
+        GraduateBest = #{graduatebest,jdbcType=VARCHAR},
+      </if>
+      <if test="graduategood != null">
+        GraduateGood = #{graduategood,jdbcType=VARCHAR},
+      </if>
+      <if test="graduatebad != null">
+        GraduateBad = #{graduatebad,jdbcType=VARCHAR},
+      </if>
+      <if test="audit != null">
+        Audit = #{audit,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jks.entity.Experience">
+    update experience
+    set Admcode = #{admcode,jdbcType=VARCHAR},
+      Year = #{year,jdbcType=VARCHAR},
+      City = #{city,jdbcType=VARCHAR},
+      TheoryBest = #{theorybest,jdbcType=VARCHAR},
+      TheoryGood = #{theorygood,jdbcType=VARCHAR},
+      TheoryBad = #{theorybad,jdbcType=VARCHAR},
+      MajorBest = #{majorbest,jdbcType=VARCHAR},
+      MajorGood = #{majorgood,jdbcType=VARCHAR},
+      MajorBad = #{majorbad,jdbcType=VARCHAR},
+      InternshipBest = #{internshipbest,jdbcType=VARCHAR},
+      InternshipGood = #{internshipgood,jdbcType=VARCHAR},
+      InternshipBad = #{internshipbad,jdbcType=VARCHAR},
+      CampusBest = #{campusbest,jdbcType=VARCHAR},
+      CampusGood = #{campusgood,jdbcType=VARCHAR},
+      CampusBad = #{campusbad,jdbcType=VARCHAR},
+      LifeBest = #{lifebest,jdbcType=VARCHAR},
+      LifeGood = #{lifegood,jdbcType=VARCHAR},
+      LifeBad = #{lifebad,jdbcType=VARCHAR},
+      SafetyBest = #{safetybest,jdbcType=VARCHAR},
+      SafetyGood = #{safetygood,jdbcType=VARCHAR},
+      SafetyBad = #{safetybad,jdbcType=VARCHAR},
+      GraduateBest = #{graduatebest,jdbcType=VARCHAR},
+      GraduateGood = #{graduategood,jdbcType=VARCHAR},
+      GraduateBad = #{graduatebad,jdbcType=VARCHAR},
+      Audit = #{audit,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

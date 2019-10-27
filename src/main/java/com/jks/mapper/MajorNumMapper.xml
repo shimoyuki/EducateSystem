@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.MajorNumDao">
+	
+	<select id="getMajorNumList"  resultType="MajorNum" parameterType="java.lang.String">
+		SELECT * FROM majornum  WHERE 1 = 1
+		 <if test="year != null and year != ''">
+           AND `Year` = #{year}
+         </if>
+         <if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+         </if>
+	</select>
+	
+	 <insert id="saveMajorNum" parameterType="MajorNum">
+	 	INSERT INTO majornum
+	 	(
+	 	 Admcode,
+	 	 Year,
+	 	 City,
+	 	 ClassCriter,
+	 	 LeadNatShareMajor,
+	 	<!--  SchoolEnterMajor, -->
+	 	 TextTeacEditMajor,
+	 	 StatePlanText,
+	 	 SchMajorMater,
+	 	<!--  ClassHour,
+	 	 MajorHour,
+	 	 MajorBHour,
+	 	 MajorCHour,
+	 	 DispClass,
+	 	 BCClassHour,
+	 	 Chinese,
+	 	 Moral,
+	 	 Math,
+	 	 English,
+	 	 Sports,
+	 	 Art,
+	 	 Computer,
+	 	 History, -->
+	 	 Audit
+	 	 ) 
+	 	VALUES
+	 	(
+	 	#{admcode},
+	 	#{year},
+	 	#{city},
+	 	#{classCriter},
+	 	#{leadNatShareMajor},
+	 	<!-- #{schoolEnterMajor}, -->
+	 	#{textTeacEditMajor},
+	 	#{statePlanText},
+	 	#{schMajorMater},
+	 	<!-- #{classHour},
+	 	#{majorHour},
+	 	#{majorBHour},
+	 	#{majorCHour},
+	 	#{dispClass},
+	 	#{bCClassHour},
+	 	#{chinese},
+	 	#{moral},
+	 	#{math},
+	 	#{english},
+	 	#{sports},
+	 	#{art},
+	 	#{computer}, 
+	 	#{history},-->
+	    0 
+	 	) 
+	</insert>
+	
+	<delete id="deleteMajorNum" parameterType="MajorNum">
+		DELETE FROM majornum WHERE id=#{id}
+	</delete>
+	
+	<select id="findById" parameterType="int" resultType="MajorNum">    
+        select * from majornum where id=#{id}    
+    </select> 
+	
+	<update id="updateMajorNum" parameterType="MajorNum">
+		UPDATE majornum SET 
+	 	 ClassCriter=#{classCriter},
+	 	 LeadNatShareMajor=#{leadNatShareMajor},
+	 	<!--  SchoolEnterMajor=#{schoolEnterMajor}, -->
+	 	 TextTeacEditMajor=#{textTeacEditMajor},
+	 	 StatePlanText=#{statePlanText},
+	 	 SchMajorMater=#{schMajorMater}
+	 	 <!-- ClassHour=#{classHour},
+	 	 MajorHour=#{majorHour},
+	 	 MajorBHour=#{majorBHour},
+	 	 MajorCHour=#{majorCHour},
+	 	 DispClass=#{dispClass},
+	 	 BCClassHour=#{bCClassHour},
+	 	 Chinese=#{chinese},
+	 	 Moral=#{moral},
+	 	 Math=#{math},
+	 	 English=#{english},
+	 	 Sports=#{sports},
+	 	 Art=#{art},
+	 	 Computer=#{computer},
+	 	 History=#{history} -->
+		WHERE id=#{id}
+	</update>  
+	
+	<update id="updateAudit" parameterType="int">
+		UPDATE majornum SET 
+	 	 Audit=1
+		WHERE id=#{id}
+	</update> 
+	
+	<select id="findByCity"  resultType="MajorNum" parameterType="java.lang.String">
+		SELECT * FROM majornum WHERE 
+		City LIKE CONCAT('%','${city}','%' ) 
+		<if test="year != null and year != ''">
+           AND `Year` = #{year}
+        </if>
+    </select>
+    
+    <select id="checkYear" parameterType="MajorNum" resultType="java.lang.Integer">
+		select count(*) from majornum where Year=#{year} and Admcode=#{admcode}
+	</select> 
+	
+</mapper>

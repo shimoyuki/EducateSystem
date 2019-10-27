@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+<configuration>
+	<!-- 输出到控制台 -->
+	<!-- <settings>
+		<setting name="logImpl" value="LOG4J2" />
+	</settings> -->
+
+	<typeAliases>
+		<!-- 基本情况 -->
+		<typeAlias alias="Size" type="com.jks.entity.Size" />
+		<typeAlias alias="Equitment" type="com.jks.entity.Equitment" />
+		<typeAlias alias="Teachers" type="com.jks.entity.Teachers" />
+		<typeAlias alias="Information" type="com.jks.entity.Information" />
+		<!-- 学生发展 -->
+		<typeAlias alias="StudentQuality" type="com.jks.entity.StudentQuality" />
+		<typeAlias alias="Experience" type="com.jks.entity.Experience" />
+		<typeAlias alias="EmployQuality" type="com.jks.entity.EmployQuality" />
+		<!-- 质量保障措施 -->
+		<typeAlias alias="MajorLayout" type="com.jks.entity.MajorLayout" />
+		<typeAlias alias="MajorNum" type="com.jks.entity.MajorNum" />
+		<typeAlias alias="MajorStu" type="com.jks.entity.MajorStu" />
+		<typeAlias alias="Major" type="com.jks.entity.Major" />
+		<typeAlias alias="QualityAssurance" type="com.jks.entity.QualityAssurance" />
+		<typeAlias alias="EducationTrain" type="com.jks.entity.EducationTrain" />
+		<!-- 校企合作 -->
+		<typeAlias alias="Schoolenterprise" type="com.jks.entity.Schoolenterprise" />
+		<typeAlias alias="Internship" type="com.jks.entity.Internship" />
+		<typeAlias alias="Groupschool" type="com.jks.entity.Groupschool" />
+		<!-- 社会贡献 -->
+		<typeAlias alias="SkillTrain" type="com.jks.entity.SkillTrain" />
+		<typeAlias alias="Skill" type="com.jks.entity.Skill" />
+		<typeAlias alias="SocialService" type="com.jks.entity.SocialService" />
+		<typeAlias alias="CounpaSupp" type="com.jks.entity.CounpaSupp" />
+		<typeAlias alias="Poor" type="com.jks.entity.Poor" />
+		<!-- 举办者履职 -->
+		<typeAlias alias="Funds" type="com.jks.entity.Funds" />
+		<typeAlias alias="ProjectInput" type="com.jks.entity.ProjectInput" />
+		<typeAlias alias="Policy" type="com.jks.entity.Policy" />
+		<typeAlias alias="PolicyMeasure" type="com.jks.entity.PolicyMeasure" />
+		<!-- 党建工作 -->
+		<typeAlias alias="Partybulid" type="com.jks.entity.Partybulid" />
+		<!-- 其它 -->
+		<typeAlias alias="User" type="com.jks.entity.User" />
+		<typeAlias alias="Informant" type="com.jks.entity.Informant" />
+		<typeAlias alias="FileInfo" type="com.jks.entity.FileInfo" />
+		<typeAlias alias="AuditSchool" type="com.jks.entity.AuditSchool" />
+		<typeAlias alias="MajorSchool" type="com.jks.entity.MajorSchool" />
+		<typeAlias alias="SchoolInfo" type="com.jks.entity.SchoolInfo" />
+		<typeAlias alias="TargetName" type="com.jks.entity.TargetName" />
+		<typeAlias alias="Standard" type="com.jks.entity.Standard" />
+		<typeAlias alias="WriteSituation" type="com.jks.entity.WriteSituation" />
+
+	</typeAliases> 
+
+	<plugins> 
+		<plugin interceptor="com.github.pagehelper.PageInterceptor"> 
+			<property name="helperDialect" value="mysql" />
+			<property name="reasonable" value="true" />
+			<property name="pageSizeZero" value="true" />
+		</plugin> 
+	</plugins> 
+	<mappers>
+		<mapper resource="com/jks/mapper/UserMapper.xml" />
+		<mapper resource="com/jks/mapper/InformantMapper.xml" />
+		
+		<mapper resource="com/jks/mapper/SizeMapper.xml" />		
+		<mapper resource="com/jks/mapper/TeachersMapper.xml" />
+		<mapper resource="com/jks/mapper/EquitmentMapper.xml" />
+		<mapper resource="com/jks/mapper/InformationMapper.xml"/>	
+		
+		<mapper resource="com/jks/mapper/StudentQualityMapper.xml" />
+		<mapper resource="com/jks/mapper/ExperienceMapper.xml" />
+		<mapper resource="com/jks/mapper/EmployQualityMapper.xml" />
+		
+		<mapper resource="com/jks/mapper/GroupschoolMapper.xml" />	
+		<mapper resource="com/jks/mapper/SchoolenterpriseMapper.xml" />	
+		<mapper resource="com/jks/mapper/InternshipMapper.xml" />	
+		
+		<mapper resource="com/jks/mapper/SkillTrainMapper.xml" />	
+		<mapper resource="com/jks/mapper/SkillMapper.xml" />	
+		<mapper resource="com/jks/mapper/SocialServiceMapper.xml" />	
+		<mapper resource="com/jks/mapper/CounpaSuppMapper.xml" />	
+		<mapper resource="com/jks/mapper/PoorMapper.xml" />	
+		
+		<mapper resource="com/jks/mapper/MajorLayoutMapper.xml" />
+		<mapper resource="com/jks/mapper/MajorNumMapper.xml" />
+		<mapper resource="com/jks/mapper/MajorStuMapper.xml" />		
+		<mapper resource="com/jks/mapper/QualityAssuranceMapper.xml" />
+		<mapper resource="com/jks/mapper/EducationTrainMapper.xml" />	
+		<mapper resource="com/jks/mapper/MajorQueryMapper.xml" />
+			
+		<mapper resource="com/jks/mapper/FundsMapper.xml" />
+		<mapper resource="com/jks/mapper/ProjectInputMapper.xml" />	
+		<mapper resource="com/jks/mapper/PolicyMapper.xml" />	
+		<mapper resource="com/jks/mapper/PolicyMeasureMapper.xml" />
+		
+		<mapper resource="com/jks/mapper/PartybulidMapper.xml"/>
+		
+		<mapper resource="com/jks/mapper/QuerySchoolInfoMapper.xml" />	
+		<mapper resource="com/jks/mapper/GetCityListMapper.xml" />
+		<mapper resource="com/jks/mapper/DataQueryMapper.xml" />
+		<mapper resource="com/jks/mapper/WriteSituationMapper.xml" />
+		<mapper resource="com/jks/mapper/DataSumAndAvgMapper.xml" />		
+		
+		<mapper resource="com/jks/mapper/FileInfoMapper.xml" />	
+		<mapper resource="com/jks/mapper/SchoolInfoMapper.xml" />
+		<mapper resource="com/jks/mapper/AuditSchoolMapper.xml" />		
+		
+		<mapper resource="com/jks/mapper/MajorSchoolMapper.xml" />
+		<mapper resource="com/jks/mapper/MajorMapper.xml" />		
+		
+		<mapper resource="com/jks/mapper/GetCityListMapper.xml" />
+		<mapper resource="com/jks/mapper/ChartAnalysisMapper.xml" />	
+		<mapper resource="com/jks/mapper/TargetNameMapper.xml" />	
+	</mappers>
+
+
+</configuration>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.SizeDao">
+	
+	<select id="getSizeList"  resultType="Size" parameterType="java.lang.String">
+		SELECT * FROM size WHERE 1 = 1
+		  <if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+         </if>
+		 <if test="year != null and year != ''">
+           AND `Year` = #{year}
+         </if>
+      
+	</select>
+	
+	 <insert id="saveSize" parameterType="Size">
+	 	INSERT INTO size
+	 	(
+	 	 Admcode,
+	 	 City,
+	 	 Year,
+	 	 SchoolRun,
+	 	 Area,
+	 	 OwnPropArea,
+	 	 TotalArea,
+	 	 SchOwnConArea,
+	 	 StuArea,
+	 	 TeaAuxArea,
+	 	 TrainArea,
+	 	 PsyArea,
+	 	 DormArea,
+	 	 DormPerArea,
+	 	 SchoolLevel,
+	 	 SchoolSubject,
+	 	 TotalStudent,
+	 	 AnnualGraduate,
+	 	 Enrollment,
+	 	 Majors,
+	 	 ThreeConsol,
+	 	 Audit
+	 	 ) 
+	 	VALUES
+	 	(
+	 	#{admcode},
+	 	#{city},
+	 	#{year},
+	 	#{schoolRun},
+	 	#{area},
+	 	#{ownPropArea},
+	 	#{totalArea},
+	 	#{schOwnConArea},
+	 	#{stuArea},
+	 	#{teaAuxArea},
+	 	#{trainArea},
+	 	#{psyArea},
+	 	#{dormArea},
+	 	#{dormPerArea},
+	 	#{schoolLevel},
+	 	#{schoolSubject},
+	 	#{totalStudent},
+	 	#{annualGraduate},
+	 	#{enrollment},
+	 	#{majors},
+	 	#{threeConsol},
+	 	0
+	 	) 
+	</insert>
+	
+	<delete id="deleteSize" parameterType="Size">
+		DELETE FROM size WHERE id=#{id}
+	</delete>
+	
+	<select id="findById" parameterType="int" resultType="Size">    
+        select * from size where id=#{id}    
+    </select> 
+	
+	<update id="updateSize" parameterType="Size">
+		UPDATE size SET 
+		 Year=#{year},
+	 	 SchoolRun=#{schoolRun},
+	 	 Area=#{area},
+	 	 OwnPropArea=#{ownPropArea},
+	 	 TotalArea=#{totalArea},
+	 	 SchOwnConArea=#{schOwnConArea},
+	 	 StuArea=#{stuArea},
+	 	 TeaAuxArea=#{teaAuxArea},
+	 	 TrainArea=#{trainArea},
+	 	 PsyArea=#{psyArea},
+	 	 DormArea=#{dormArea},
+	 	 DormPerArea=#{dormPerArea},
+	 	 SchoolLevel=#{schoolLevel},
+	 	 SchoolSubject=#{schoolSubject},
+	 	 TotalStudent=#{totalStudent},
+	 	 AnnualGraduate=#{annualGraduate},
+	 	 Enrollment=#{enrollment},
+	 	 Majors=#{majors},
+	 	 ThreeConsol=#{threeConsol}
+		WHERE id=#{id}
+	</update> 
+	
+	<update id="updateAudit" parameterType="int">
+		UPDATE size SET 
+	 	 Audit=1
+		WHERE id=#{id}
+	</update>
+	
+	<select id="findByCity"  resultType="Size" parameterType="java.lang.String">
+		SELECT * FROM size WHERE 
+		City LIKE CONCAT('%','${city}','%' ) 
+		<if test="year != null and year != ''">
+           AND `Year` = #{year}
+        </if>
+    </select> 
+	
+	<select id="checkYear" parameterType="Size" resultType="java.lang.Integer">
+		select count(*) from size where Year=#{year} and Admcode=#{admcode}
+	</select>
+	
+	<select id="checkMajor" parameterType="String" resultType="java.lang.Integer">
+		select majors from size where Admcode=#{admcode} and Year=#{year}
+	</select>
+	
+</mapper>

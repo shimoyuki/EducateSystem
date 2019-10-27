@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.jks.entity.User">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="Usercode" jdbcType="VARCHAR" property="usercode" />
+    <result column="Password" jdbcType="VARCHAR" property="password" />
+    <result column="Level" jdbcType="CHAR" property="level" />
+    <result column="SchoolName" jdbcType="VARCHAR" property="schoolname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, Usercode, Password, Level, SchoolName
+  </sql>
+  <select id="selectUserIDByCode" parameterType="java.lang.String" resultType="java.lang.Integer">
+  	select ID from user where Usercode=#{usercode,jdbcType=VARCHAR}
+  </select>
+  <select id="selectPWByID" parameterType="java.lang.Integer" resultType="java.lang.String">
+  	select Password from user where ID=#{id,jdbcType=INTEGER}
+  </select>
+   <select id="selectPWByUserCode" parameterType="java.lang.String" resultType="java.lang.String">
+  	select Password from user where Usercode=#{usercode,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByNameAndPW" resultType="com.jks.entity.User">
+  	select * from user where Usercode=${loginName} and Password=${loginPwd}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectUserByCode" parameterType="java.lang.String" resultType="com.jks.entity.User">
+  	select
+  	<include refid="Base_Column_List" />
+    from user
+    where Usercode=#{usercode,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectAllUser" resultType="com.jks.entity.User">
+  	select
+  	<include refid="Base_Column_List" />
+    from user
+  </select>
+  
+  <select id="selectSumUser" resultType="java.lang.Integer">
+  	select count(*) from user
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jks.entity.User">
+    insert into user (ID, Usercode, Password, 
+      Level, SchoolName)
+    values (#{id,jdbcType=INTEGER}, #{usercode,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{level,jdbcType=CHAR}, #{schoolname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jks.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="usercode != null">
+        Usercode,
+      </if>
+      <if test="password != null">
+        Password,
+      </if>
+      <if test="level != null">
+        Level,
+      </if>
+      <if test="schoolname != null">
+        SchoolName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="usercode != null">
+        #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=CHAR},
+      </if>
+      <if test="schoolname != null">
+        #{schoolname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="saveUser" parameterType="com.jks.entity.User">
+  	insert into user (Usercode, Password, 
+     Level, SchoolName)
+     values (#{usercode,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{level,jdbcType=CHAR}, #{schoolname,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jks.entity.User">
+    update user
+    <set>
+      <if test="usercode != null">
+        Usercode = #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        Level = #{level,jdbcType=CHAR},
+      </if>
+      <if test="schoolname != null">
+        SchoolName = #{schoolname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jks.entity.User">
+    update user
+    set Usercode = #{usercode,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR},
+      Level = #{level,jdbcType=CHAR},
+      SchoolName = #{schoolname,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updatePWByUserCode" parameterType="java.lang.String">
+  	 update user
+   	 set Password = #{0}
+     where Usercode = #{1}
+  </update>
+  <select id="getAllUserByAccount"  resultType="com.jks.entity.User" parameterType="java.lang.String">
+		SELECT * FROM user WHERE 1 = 1
+		  <if test="_parameter != null and _parameter != ''">
+           AND `Usercode` = #{account}
+         </if>		     
+	</select>
+</mapper>

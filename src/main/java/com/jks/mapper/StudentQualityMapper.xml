@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.StudentQualityMapper">
+  <resultMap id="BaseResultMap" type="com.jks.entity.StudentQuality">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="Admcode" jdbcType="VARCHAR" property="admcode" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="City" jdbcType="VARCHAR" property="city" />
+    <result column="MoralEquit" jdbcType="INTEGER" property="moralequit" />
+    <result column="PhyCenter" jdbcType="VARCHAR" property="phycenter" />
+    <result column="Advanced" jdbcType="VARCHAR" property="advanced" />
+    <result column="MoralBase" jdbcType="VARCHAR" property="moralbase" />
+    <result column="SchoolSpirit" jdbcType="VARCHAR" property="schoolspirit" />
+    <result column="ManageSpirit" jdbcType="VARCHAR" property="managespirit" />
+    <result column="Volunteer" jdbcType="VARCHAR" property="volunteer" />
+    <result column="RedFlag" jdbcType="VARCHAR" property="redflag" />
+    <result column="OtherHonor" jdbcType="VARCHAR" property="otherhonor" />
+    <result column="GoodClass" jdbcType="REAL" property="goodclass" />
+    <result column="FulltimeMoral" jdbcType="REAL" property="fulltimemoral" />
+    <result column="MoralTask" jdbcType="REAL" property="moraltask" />
+    <result column="MoralNum" jdbcType="REAL" property="moralnum" />
+    <result column="MoralPart" jdbcType="VARCHAR" property="moralpart" />
+    <result column="MoralText" jdbcType="REAL" property="moraltext" />
+    <result column="AssessOptimal" jdbcType="VARCHAR" property="assessoptimal" />
+    <result column="AssessGood" jdbcType="VARCHAR" property="assessgood" />
+    <result column="AssessMiddle" jdbcType="VARCHAR" property="assessmiddle" />
+    <result column="AssessPoor" jdbcType="VARCHAR" property="assesspoor" />
+    <result column="PyhConselPer" jdbcType="VARCHAR" property="pyhconselper" />
+    <result column="ProvGoodGrade" jdbcType="REAL" property="provgoodgrade" />
+    <result column="ProvGoodCadre" jdbcType="REAL" property="provgoodcadre" />
+    <result column="ProvGoodStud" jdbcType="REAL" property="provgoodstud" />
+    <result column="ProvOther" jdbcType="VARCHAR" property="provother" />
+    <result column="CrimeRate" jdbcType="REAL" property="crimerate" />
+    <result column="CampusViolence" jdbcType="REAL" property="campusviolence" />
+    <result column="ExamDiscip" jdbcType="REAL" property="examdiscip" />
+    <result column="JoinOrgan" jdbcType="REAL" property="joinorgan" />
+    <result column="JoinPraty" jdbcType="REAL" property="joinpraty" />
+    <result column="SocailVolun" jdbcType="REAL" property="socailvolun" />
+    <result column="SocailPrac" jdbcType="DECIMAL" property="socailprac" />
+    <result column="StudentOrgan" jdbcType="REAL" property="studentorgan" />
+    <result column="OrganStu" jdbcType="REAL" property="organstu" />
+    <result column="StateCivil" jdbcType="REAL" property="statecivil" />
+    <result column="ProvinCivil" jdbcType="REAL" property="provincivil" />
+    <result column="CityCivil" jdbcType="REAL" property="citycivil" />
+    <result column="StateFirstAward" jdbcType="REAL" property="statefirstaward" />
+    <result column="StateSecondAward" jdbcType="REAL" property="statesecondaward" />
+    <result column="StateThirdAward" jdbcType="REAL" property="statethirdaward" />
+    <result column="ProvinFirstAward" jdbcType="REAL" property="provinfirstaward" />
+    <result column="ProvinSecondAward" jdbcType="REAL" property="provinsecondaward" />
+    <result column="ProvinThirdAward" jdbcType="REAL" property="provinthirdaward" />
+    <result column="CityFirstAward" jdbcType="REAL" property="cityfirstaward" />
+    <result column="CitySecondAward" jdbcType="REAL" property="citysecondaward" />
+    <result column="CityThirdAward" jdbcType="REAL" property="citythirdaward" />
+    <result column="OneConsol" jdbcType="VARCHAR" property="oneconsol" />
+    <result column="TwoConsol" jdbcType="VARCHAR" property="twoconsol" />
+    <result column="ThreeConsol" jdbcType="VARCHAR" property="threeconsol" />
+    <result column="CultDiviPassRate" jdbcType="VARCHAR" property="cultdivipassrate" />
+    <result column="PhyAssessPassRate" jdbcType="VARCHAR" property="phyassesspassrate" />
+    <result column="ProfSkillPassRate" jdbcType="VARCHAR" property="profskillpassrate" />
+    <result column="CareerCert" jdbcType="REAL" property="careercert" />
+    <result column="DoubCert" jdbcType="VARCHAR" property="doubcert" />
+    <result column="GradRate" jdbcType="VARCHAR" property="gradrate" />
+    <result column="Audit" jdbcType="INTEGER" property="audit" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, Admcode, Year, City, MoralEquit, PhyCenter, Advanced, MoralBase, SchoolSpirit, 
+    ManageSpirit, Volunteer, RedFlag, OtherHonor, GoodClass, FulltimeMoral, MoralTask, 
+    MoralNum, MoralPart, MoralText, AssessOptimal, AssessGood, AssessMiddle, AssessPoor, 
+    PyhConselPer, ProvGoodGrade, ProvGoodCadre, ProvGoodStud, ProvOther, CrimeRate, CampusViolence, 
+    ExamDiscip, JoinOrgan, JoinPraty, SocailVolun, SocailPrac, StudentOrgan, OrganStu, 
+    StateCivil, ProvinCivil, CityCivil, StateFirstAward, StateSecondAward, StateThirdAward, 
+    ProvinFirstAward, ProvinSecondAward, ProvinThirdAward, CityFirstAward, CitySecondAward, 
+    CityThirdAward, OneConsol, TwoConsol, ThreeConsol, CultDiviPassRate, PhyAssessPassRate, 
+    ProfSkillPassRate, CareerCert, DoubCert, GradRate, Audit
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from studentquality
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="query" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from studentquality where 1=1
+		<if test="year!= null">and year=#{year,jdbcType=VARCHAR}</if>
+		<if test="admcode!= null">and admcode=#{admcode,jdbcType=VARCHAR}</if>
+		<if test="city!= null">and city like #{city,jdbcType=VARCHAR}</if>
+		<if test="audit!= null">and audit=#{audit,jdbcType=INTEGER}</if>
+	</select>
+	<select id="selectAdmcodeByCity" parameterType="java.lang.String" resultType="java.lang.String">
+		select Admcode 
+		from studentquality
+		where city like #{city,jdbcType=VARCHAR}
+	</select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from studentquality
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jks.entity.StudentQuality">
+    insert into studentquality (ID, Admcode, Year, 
+      City, MoralEquit, PhyCenter, 
+      Advanced, MoralBase, SchoolSpirit, 
+      ManageSpirit, Volunteer, RedFlag, 
+      OtherHonor, GoodClass, FulltimeMoral, 
+      MoralTask, MoralNum, MoralPart, 
+      MoralText, AssessOptimal, AssessGood, 
+      AssessMiddle, AssessPoor, PyhConselPer, 
+      ProvGoodGrade, ProvGoodCadre, ProvGoodStud, 
+      ProvOther, CrimeRate, CampusViolence, 
+      ExamDiscip, JoinOrgan, JoinPraty, 
+      SocailVolun, SocailPrac, StudentOrgan, 
+      OrganStu, StateCivil, ProvinCivil, 
+      CityCivil, StateFirstAward, StateSecondAward, 
+      StateThirdAward, ProvinFirstAward, ProvinSecondAward, 
+      ProvinThirdAward, CityFirstAward, CitySecondAward, 
+      CityThirdAward, OneConsol, TwoConsol, 
+      ThreeConsol, CultDiviPassRate, PhyAssessPassRate, 
+      ProfSkillPassRate, CareerCert, DoubCert, 
+      GradRate, Audit)
+    values (#{id,jdbcType=INTEGER}, #{admcode,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{moralequit,jdbcType=INTEGER}, #{phycenter,jdbcType=VARCHAR}, 
+      #{advanced,jdbcType=VARCHAR}, #{moralbase,jdbcType=VARCHAR}, #{schoolspirit,jdbcType=VARCHAR}, 
+      #{managespirit,jdbcType=VARCHAR}, #{volunteer,jdbcType=VARCHAR}, #{redflag,jdbcType=VARCHAR}, 
+      #{otherhonor,jdbcType=VARCHAR}, #{goodclass,jdbcType=REAL}, #{fulltimemoral,jdbcType=REAL}, 
+      #{moraltask,jdbcType=REAL}, #{moralnum,jdbcType=REAL}, #{moralpart,jdbcType=VARCHAR}, 
+      #{moraltext,jdbcType=REAL}, #{assessoptimal,jdbcType=VARCHAR}, #{assessgood,jdbcType=VARCHAR}, 
+      #{assessmiddle,jdbcType=VARCHAR}, #{assesspoor,jdbcType=VARCHAR}, #{pyhconselper,jdbcType=VARCHAR}, 
+      #{provgoodgrade,jdbcType=REAL}, #{provgoodcadre,jdbcType=REAL}, #{provgoodstud,jdbcType=REAL}, 
+      #{provother,jdbcType=VARCHAR}, #{crimerate,jdbcType=REAL}, #{campusviolence,jdbcType=REAL}, 
+      #{examdiscip,jdbcType=REAL}, #{joinorgan,jdbcType=REAL}, #{joinpraty,jdbcType=REAL}, 
+      #{socailvolun,jdbcType=REAL}, #{socailprac,jdbcType=DECIMAL}, #{studentorgan,jdbcType=REAL}, 
+      #{organstu,jdbcType=REAL}, #{statecivil,jdbcType=REAL}, #{provincivil,jdbcType=REAL}, 
+      #{citycivil,jdbcType=REAL}, #{statefirstaward,jdbcType=REAL}, #{statesecondaward,jdbcType=REAL}, 
+      #{statethirdaward,jdbcType=REAL}, #{provinfirstaward,jdbcType=REAL}, #{provinsecondaward,jdbcType=REAL}, 
+      #{provinthirdaward,jdbcType=REAL}, #{cityfirstaward,jdbcType=REAL}, #{citysecondaward,jdbcType=REAL}, 
+      #{citythirdaward,jdbcType=REAL}, #{oneconsol,jdbcType=VARCHAR}, #{twoconsol,jdbcType=VARCHAR}, 
+      #{threeconsol,jdbcType=VARCHAR}, #{cultdivipassrate,jdbcType=VARCHAR}, #{phyassesspassrate,jdbcType=VARCHAR}, 
+      #{profskillpassrate,jdbcType=VARCHAR}, #{careercert,jdbcType=REAL}, #{doubcert,jdbcType=VARCHAR}, 
+      #{gradrate,jdbcType=VARCHAR}, #{audit,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jks.entity.StudentQuality">
+    insert into studentquality
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="admcode != null">
+        Admcode,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="city != null">
+        City,
+      </if>
+      <if test="moralequit != null">
+        MoralEquit,
+      </if>
+      <if test="phycenter != null">
+        PhyCenter,
+      </if>
+      <if test="advanced != null">
+        Advanced,
+      </if>
+      <if test="moralbase != null">
+        MoralBase,
+      </if>
+      <if test="schoolspirit != null">
+        SchoolSpirit,
+      </if>
+      <if test="managespirit != null">
+        ManageSpirit,
+      </if>
+      <if test="volunteer != null">
+        Volunteer,
+      </if>
+      <if test="redflag != null">
+        RedFlag,
+      </if>
+      <if test="otherhonor != null">
+        OtherHonor,
+      </if>
+      <if test="goodclass != null">
+        GoodClass,
+      </if>
+      <if test="fulltimemoral != null">
+        FulltimeMoral,
+      </if>
+      <if test="moraltask != null">
+        MoralTask,
+      </if>
+      <if test="moralnum != null">
+        MoralNum,
+      </if>
+      <if test="moralpart != null">
+        MoralPart,
+      </if>
+      <if test="moraltext != null">
+        MoralText,
+      </if>
+      <if test="assessoptimal != null">
+        AssessOptimal,
+      </if>
+      <if test="assessgood != null">
+        AssessGood,
+      </if>
+      <if test="assessmiddle != null">
+        AssessMiddle,
+      </if>
+      <if test="assesspoor != null">
+        AssessPoor,
+      </if>
+      <if test="pyhconselper != null">
+        PyhConselPer,
+      </if>
+      <if test="provgoodgrade != null">
+        ProvGoodGrade,
+      </if>
+      <if test="provgoodcadre != null">
+        ProvGoodCadre,
+      </if>
+      <if test="provgoodstud != null">
+        ProvGoodStud,
+      </if>
+      <if test="provother != null">
+        ProvOther,
+      </if>
+      <if test="crimerate != null">
+        CrimeRate,
+      </if>
+      <if test="campusviolence != null">
+        CampusViolence,
+      </if>
+      <if test="examdiscip != null">
+        ExamDiscip,
+      </if>
+      <if test="joinorgan != null">
+        JoinOrgan,
+      </if>
+      <if test="joinpraty != null">
+        JoinPraty,
+      </if>
+      <if test="socailvolun != null">
+        SocailVolun,
+      </if>
+      <if test="socailprac != null">
+        SocailPrac,
+      </if>
+      <if test="studentorgan != null">
+        StudentOrgan,
+      </if>
+      <if test="organstu != null">
+        OrganStu,
+      </if>
+      <if test="statecivil != null">
+        StateCivil,
+      </if>
+      <if test="provincivil != null">
+        ProvinCivil,
+      </if>
+      <if test="citycivil != null">
+        CityCivil,
+      </if>
+      <if test="statefirstaward != null">
+        StateFirstAward,
+      </if>
+      <if test="statesecondaward != null">
+        StateSecondAward,
+      </if>
+      <if test="statethirdaward != null">
+        StateThirdAward,
+      </if>
+      <if test="provinfirstaward != null">
+        ProvinFirstAward,
+      </if>
+      <if test="provinsecondaward != null">
+        ProvinSecondAward,
+      </if>
+      <if test="provinthirdaward != null">
+        ProvinThirdAward,
+      </if>
+      <if test="cityfirstaward != null">
+        CityFirstAward,
+      </if>
+      <if test="citysecondaward != null">
+        CitySecondAward,
+      </if>
+      <if test="citythirdaward != null">
+        CityThirdAward,
+      </if>
+      <if test="oneconsol != null">
+        OneConsol,
+      </if>
+      <if test="twoconsol != null">
+        TwoConsol,
+      </if>
+      <if test="threeconsol != null">
+        ThreeConsol,
+      </if>
+      <if test="cultdivipassrate != null">
+        CultDiviPassRate,
+      </if>
+      <if test="phyassesspassrate != null">
+        PhyAssessPassRate,
+      </if>
+      <if test="profskillpassrate != null">
+        ProfSkillPassRate,
+      </if>
+      <if test="careercert != null">
+        CareerCert,
+      </if>
+      <if test="doubcert != null">
+        DoubCert,
+      </if>
+      <if test="gradrate != null">
+        GradRate,
+      </if>
+      <if test="audit != null">
+        Audit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="admcode != null">
+        #{admcode,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="moralequit != null">
+        #{moralequit,jdbcType=INTEGER},
+      </if>
+      <if test="phycenter != null">
+        #{phycenter,jdbcType=VARCHAR},
+      </if>
+      <if test="advanced != null">
+        #{advanced,jdbcType=VARCHAR},
+      </if>
+      <if test="moralbase != null">
+        #{moralbase,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolspirit != null">
+        #{schoolspirit,jdbcType=VARCHAR},
+      </if>
+      <if test="managespirit != null">
+        #{managespirit,jdbcType=VARCHAR},
+      </if>
+      <if test="volunteer != null">
+        #{volunteer,jdbcType=VARCHAR},
+      </if>
+      <if test="redflag != null">
+        #{redflag,jdbcType=VARCHAR},
+      </if>
+      <if test="otherhonor != null">
+        #{otherhonor,jdbcType=VARCHAR},
+      </if>
+      <if test="goodclass != null">
+        #{goodclass,jdbcType=REAL},
+      </if>
+      <if test="fulltimemoral != null">
+        #{fulltimemoral,jdbcType=REAL},
+      </if>
+      <if test="moraltask != null">
+        #{moraltask,jdbcType=REAL},
+      </if>
+      <if test="moralnum != null">
+        #{moralnum,jdbcType=REAL},
+      </if>
+      <if test="moralpart != null">
+        #{moralpart,jdbcType=VARCHAR},
+      </if>
+      <if test="moraltext != null">
+        #{moraltext,jdbcType=REAL},
+      </if>
+      <if test="assessoptimal != null">
+        #{assessoptimal,jdbcType=VARCHAR},
+      </if>
+      <if test="assessgood != null">
+        #{assessgood,jdbcType=VARCHAR},
+      </if>
+      <if test="assessmiddle != null">
+        #{assessmiddle,jdbcType=VARCHAR},
+      </if>
+      <if test="assesspoor != null">
+        #{assesspoor,jdbcType=VARCHAR},
+      </if>
+      <if test="pyhconselper != null">
+        #{pyhconselper,jdbcType=VARCHAR},
+      </if>
+      <if test="provgoodgrade != null">
+        #{provgoodgrade,jdbcType=REAL},
+      </if>
+      <if test="provgoodcadre != null">
+        #{provgoodcadre,jdbcType=REAL},
+      </if>
+      <if test="provgoodstud != null">
+        #{provgoodstud,jdbcType=REAL},
+      </if>
+      <if test="provother != null">
+        #{provother,jdbcType=VARCHAR},
+      </if>
+      <if test="crimerate != null">
+        #{crimerate,jdbcType=REAL},
+      </if>
+      <if test="campusviolence != null">
+        #{campusviolence,jdbcType=REAL},
+      </if>
+      <if test="examdiscip != null">
+        #{examdiscip,jdbcType=REAL},
+      </if>
+      <if test="joinorgan != null">
+        #{joinorgan,jdbcType=REAL},
+      </if>
+      <if test="joinpraty != null">
+        #{joinpraty,jdbcType=REAL},
+      </if>
+      <if test="socailvolun != null">
+        #{socailvolun,jdbcType=REAL},
+      </if>
+      <if test="socailprac != null">
+        #{socailprac,jdbcType=DECIMAL},
+      </if>
+      <if test="studentorgan != null">
+        #{studentorgan,jdbcType=REAL},
+      </if>
+      <if test="organstu != null">
+        #{organstu,jdbcType=REAL},
+      </if>
+      <if test="statecivil != null">
+        #{statecivil,jdbcType=REAL},
+      </if>
+      <if test="provincivil != null">
+        #{provincivil,jdbcType=REAL},
+      </if>
+      <if test="citycivil != null">
+        #{citycivil,jdbcType=REAL},
+      </if>
+      <if test="statefirstaward != null">
+        #{statefirstaward,jdbcType=REAL},
+      </if>
+      <if test="statesecondaward != null">
+        #{statesecondaward,jdbcType=REAL},
+      </if>
+      <if test="statethirdaward != null">
+        #{statethirdaward,jdbcType=REAL},
+      </if>
+      <if test="provinfirstaward != null">
+        #{provinfirstaward,jdbcType=REAL},
+      </if>
+      <if test="provinsecondaward != null">
+        #{provinsecondaward,jdbcType=REAL},
+      </if>
+      <if test="provinthirdaward != null">
+        #{provinthirdaward,jdbcType=REAL},
+      </if>
+      <if test="cityfirstaward != null">
+        #{cityfirstaward,jdbcType=REAL},
+      </if>
+      <if test="citysecondaward != null">
+        #{citysecondaward,jdbcType=REAL},
+      </if>
+      <if test="citythirdaward != null">
+        #{citythirdaward,jdbcType=REAL},
+      </if>
+      <if test="oneconsol != null">
+        #{oneconsol,jdbcType=VARCHAR},
+      </if>
+      <if test="twoconsol != null">
+        #{twoconsol,jdbcType=VARCHAR},
+      </if>
+      <if test="threeconsol != null">
+        #{threeconsol,jdbcType=VARCHAR},
+      </if>
+      <if test="cultdivipassrate != null">
+        #{cultdivipassrate,jdbcType=VARCHAR},
+      </if>
+      <if test="phyassesspassrate != null">
+        #{phyassesspassrate,jdbcType=VARCHAR},
+      </if>
+      <if test="profskillpassrate != null">
+        #{profskillpassrate,jdbcType=VARCHAR},
+      </if>
+      <if test="careercert != null">
+        #{careercert,jdbcType=REAL},
+      </if>
+      <if test="doubcert != null">
+        #{doubcert,jdbcType=VARCHAR},
+      </if>
+      <if test="gradrate != null">
+        #{gradrate,jdbcType=VARCHAR},
+      </if>
+      <if test="audit != null">
+        #{audit,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jks.entity.StudentQuality">
+    update studentquality
+    <set>
+      <if test="admcode != null">
+        Admcode = #{admcode,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        City = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="moralequit != null">
+        MoralEquit = #{moralequit,jdbcType=INTEGER},
+      </if>
+      <if test="phycenter != null">
+        PhyCenter = #{phycenter,jdbcType=VARCHAR},
+      </if>
+      <if test="advanced != null">
+        Advanced = #{advanced,jdbcType=VARCHAR},
+      </if>
+      <if test="moralbase != null">
+        MoralBase = #{moralbase,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolspirit != null">
+        SchoolSpirit = #{schoolspirit,jdbcType=VARCHAR},
+      </if>
+      <if test="managespirit != null">
+        ManageSpirit = #{managespirit,jdbcType=VARCHAR},
+      </if>
+      <if test="volunteer != null">
+        Volunteer = #{volunteer,jdbcType=VARCHAR},
+      </if>
+      <if test="redflag != null">
+        RedFlag = #{redflag,jdbcType=VARCHAR},
+      </if>
+      <if test="otherhonor != null">
+        OtherHonor = #{otherhonor,jdbcType=VARCHAR},
+      </if>
+      <if test="goodclass != null">
+        GoodClass = #{goodclass,jdbcType=REAL},
+      </if>
+      <if test="fulltimemoral != null">
+        FulltimeMoral = #{fulltimemoral,jdbcType=REAL},
+      </if>
+      <if test="moraltask != null">
+        MoralTask = #{moraltask,jdbcType=REAL},
+      </if>
+      <if test="moralnum != null">
+        MoralNum = #{moralnum,jdbcType=REAL},
+      </if>
+      <if test="moralpart != null">
+        MoralPart = #{moralpart,jdbcType=VARCHAR},
+      </if>
+      <if test="moraltext != null">
+        MoralText = #{moraltext,jdbcType=REAL},
+      </if>
+      <if test="assessoptimal != null">
+        AssessOptimal = #{assessoptimal,jdbcType=VARCHAR},
+      </if>
+      <if test="assessgood != null">
+        AssessGood = #{assessgood,jdbcType=VARCHAR},
+      </if>
+      <if test="assessmiddle != null">
+        AssessMiddle = #{assessmiddle,jdbcType=VARCHAR},
+      </if>
+      <if test="assesspoor != null">
+        AssessPoor = #{assesspoor,jdbcType=VARCHAR},
+      </if>
+      <if test="pyhconselper != null">
+        PyhConselPer = #{pyhconselper,jdbcType=VARCHAR},
+      </if>
+      <if test="provgoodgrade != null">
+        ProvGoodGrade = #{provgoodgrade,jdbcType=REAL},
+      </if>
+      <if test="provgoodcadre != null">
+        ProvGoodCadre = #{provgoodcadre,jdbcType=REAL},
+      </if>
+      <if test="provgoodstud != null">
+        ProvGoodStud = #{provgoodstud,jdbcType=REAL},
+      </if>
+      <if test="provother != null">
+        ProvOther = #{provother,jdbcType=VARCHAR},
+      </if>
+      <if test="crimerate != null">
+        CrimeRate = #{crimerate,jdbcType=REAL},
+      </if>
+      <if test="campusviolence != null">
+        CampusViolence = #{campusviolence,jdbcType=REAL},
+      </if>
+      <if test="examdiscip != null">
+        ExamDiscip = #{examdiscip,jdbcType=REAL},
+      </if>
+      <if test="joinorgan != null">
+        JoinOrgan = #{joinorgan,jdbcType=REAL},
+      </if>
+      <if test="joinpraty != null">
+        JoinPraty = #{joinpraty,jdbcType=REAL},
+      </if>
+      <if test="socailvolun != null">
+        SocailVolun = #{socailvolun,jdbcType=REAL},
+      </if>
+      <if test="socailprac != null">
+        SocailPrac = #{socailprac,jdbcType=DECIMAL},
+      </if>
+      <if test="studentorgan != null">
+        StudentOrgan = #{studentorgan,jdbcType=REAL},
+      </if>
+      <if test="organstu != null">
+        OrganStu = #{organstu,jdbcType=REAL},
+      </if>
+      <if test="statecivil != null">
+        StateCivil = #{statecivil,jdbcType=REAL},
+      </if>
+      <if test="provincivil != null">
+        ProvinCivil = #{provincivil,jdbcType=REAL},
+      </if>
+      <if test="citycivil != null">
+        CityCivil = #{citycivil,jdbcType=REAL},
+      </if>
+      <if test="statefirstaward != null">
+        StateFirstAward = #{statefirstaward,jdbcType=REAL},
+      </if>
+      <if test="statesecondaward != null">
+        StateSecondAward = #{statesecondaward,jdbcType=REAL},
+      </if>
+      <if test="statethirdaward != null">
+        StateThirdAward = #{statethirdaward,jdbcType=REAL},
+      </if>
+      <if test="provinfirstaward != null">
+        ProvinFirstAward = #{provinfirstaward,jdbcType=REAL},
+      </if>
+      <if test="provinsecondaward != null">
+        ProvinSecondAward = #{provinsecondaward,jdbcType=REAL},
+      </if>
+      <if test="provinthirdaward != null">
+        ProvinThirdAward = #{provinthirdaward,jdbcType=REAL},
+      </if>
+      <if test="cityfirstaward != null">
+        CityFirstAward = #{cityfirstaward,jdbcType=REAL},
+      </if>
+      <if test="citysecondaward != null">
+        CitySecondAward = #{citysecondaward,jdbcType=REAL},
+      </if>
+      <if test="citythirdaward != null">
+        CityThirdAward = #{citythirdaward,jdbcType=REAL},
+      </if>
+      <if test="oneconsol != null">
+        OneConsol = #{oneconsol,jdbcType=VARCHAR},
+      </if>
+      <if test="twoconsol != null">
+        TwoConsol = #{twoconsol,jdbcType=VARCHAR},
+      </if>
+      <if test="threeconsol != null">
+        ThreeConsol = #{threeconsol,jdbcType=VARCHAR},
+      </if>
+      <if test="cultdivipassrate != null">
+        CultDiviPassRate = #{cultdivipassrate,jdbcType=VARCHAR},
+      </if>
+      <if test="phyassesspassrate != null">
+        PhyAssessPassRate = #{phyassesspassrate,jdbcType=VARCHAR},
+      </if>
+      <if test="profskillpassrate != null">
+        ProfSkillPassRate = #{profskillpassrate,jdbcType=VARCHAR},
+      </if>
+      <if test="careercert != null">
+        CareerCert = #{careercert,jdbcType=REAL},
+      </if>
+      <if test="doubcert != null">
+        DoubCert = #{doubcert,jdbcType=VARCHAR},
+      </if>
+      <if test="gradrate != null">
+        GradRate = #{gradrate,jdbcType=VARCHAR},
+      </if>
+      <if test="audit != null">
+        Audit = #{audit,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jks.entity.StudentQuality">
+    update studentquality
+    set Admcode = #{admcode,jdbcType=VARCHAR},
+      Year = #{year,jdbcType=VARCHAR},
+      City = #{city,jdbcType=VARCHAR},
+      MoralEquit = #{moralequit,jdbcType=INTEGER},
+      PhyCenter = #{phycenter,jdbcType=VARCHAR},
+      Advanced = #{advanced,jdbcType=VARCHAR},
+      MoralBase = #{moralbase,jdbcType=VARCHAR},
+      SchoolSpirit = #{schoolspirit,jdbcType=VARCHAR},
+      ManageSpirit = #{managespirit,jdbcType=VARCHAR},
+      Volunteer = #{volunteer,jdbcType=VARCHAR},
+      RedFlag = #{redflag,jdbcType=VARCHAR},
+      OtherHonor = #{otherhonor,jdbcType=VARCHAR},
+      GoodClass = #{goodclass,jdbcType=REAL},
+      FulltimeMoral = #{fulltimemoral,jdbcType=REAL},
+      MoralTask = #{moraltask,jdbcType=REAL},
+      MoralNum = #{moralnum,jdbcType=REAL},
+      MoralPart = #{moralpart,jdbcType=VARCHAR},
+      MoralText = #{moraltext,jdbcType=REAL},
+      AssessOptimal = #{assessoptimal,jdbcType=VARCHAR},
+      AssessGood = #{assessgood,jdbcType=VARCHAR},
+      AssessMiddle = #{assessmiddle,jdbcType=VARCHAR},
+      AssessPoor = #{assesspoor,jdbcType=VARCHAR},
+      PyhConselPer = #{pyhconselper,jdbcType=VARCHAR},
+      ProvGoodGrade = #{provgoodgrade,jdbcType=REAL},
+      ProvGoodCadre = #{provgoodcadre,jdbcType=REAL},
+      ProvGoodStud = #{provgoodstud,jdbcType=REAL},
+      ProvOther = #{provother,jdbcType=VARCHAR},
+      CrimeRate = #{crimerate,jdbcType=REAL},
+      CampusViolence = #{campusviolence,jdbcType=REAL},
+      ExamDiscip = #{examdiscip,jdbcType=REAL},
+      JoinOrgan = #{joinorgan,jdbcType=REAL},
+      JoinPraty = #{joinpraty,jdbcType=REAL},
+      SocailVolun = #{socailvolun,jdbcType=REAL},
+      SocailPrac = #{socailprac,jdbcType=DECIMAL},
+      StudentOrgan = #{studentorgan,jdbcType=REAL},
+      OrganStu = #{organstu,jdbcType=REAL},
+      StateCivil = #{statecivil,jdbcType=REAL},
+      ProvinCivil = #{provincivil,jdbcType=REAL},
+      CityCivil = #{citycivil,jdbcType=REAL},
+      StateFirstAward = #{statefirstaward,jdbcType=REAL},
+      StateSecondAward = #{statesecondaward,jdbcType=REAL},
+      StateThirdAward = #{statethirdaward,jdbcType=REAL},
+      ProvinFirstAward = #{provinfirstaward,jdbcType=REAL},
+      ProvinSecondAward = #{provinsecondaward,jdbcType=REAL},
+      ProvinThirdAward = #{provinthirdaward,jdbcType=REAL},
+      CityFirstAward = #{cityfirstaward,jdbcType=REAL},
+      CitySecondAward = #{citysecondaward,jdbcType=REAL},
+      CityThirdAward = #{citythirdaward,jdbcType=REAL},
+      OneConsol = #{oneconsol,jdbcType=VARCHAR},
+      TwoConsol = #{twoconsol,jdbcType=VARCHAR},
+      ThreeConsol = #{threeconsol,jdbcType=VARCHAR},
+      CultDiviPassRate = #{cultdivipassrate,jdbcType=VARCHAR},
+      PhyAssessPassRate = #{phyassesspassrate,jdbcType=VARCHAR},
+      ProfSkillPassRate = #{profskillpassrate,jdbcType=VARCHAR},
+      CareerCert = #{careercert,jdbcType=REAL},
+      DoubCert = #{doubcert,jdbcType=VARCHAR},
+      GradRate = #{gradrate,jdbcType=VARCHAR},
+      Audit = #{audit,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

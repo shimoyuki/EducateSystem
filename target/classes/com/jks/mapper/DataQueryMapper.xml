@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.DataQueryDao">
+	
+	<select id="getUserByAdmcode"  resultType="User" parameterType="java.lang.String">
+		SELECT * FROM user WHERE Usercode = #{admcode}         
+	</select>
+	
+	<select id="getSizeList"  resultType="Size" parameterType="java.lang.String">
+		SELECT * FROM size WHERE Audit = 1 
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if>
+        order by admcode,year    
+	</select>
+	
+	<select id="getSizeYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from size
+		order by year
+	</select>
+	
+	<select id="getEquitmentList"  resultType="Equitment" parameterType="java.lang.String">
+		SELECT * FROM equitment WHERE  Audit = 1 
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if> 
+        order by admcode,year  
+	</select>
+	
+	<select id="getEquitmentYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from equitment
+		order by year
+	</select>
+	
+	<select id="getTeachersList"  resultType="Teachers" parameterType="java.lang.String">
+		SELECT * FROM teachers WHERE Audit = 1 
+		 <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if> 
+        order by admcode,year     
+	</select>
+	
+	<select id="getTeachersYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from teachers
+		order by year
+	</select>
+	
+	<select id="getInformationList"  resultType="Information" parameterType="java.lang.String">
+		SELECT * FROM information WHERE Audit = 1 
+		  <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if> 
+        order by admcode,year    
+	</select>
+	
+	<select id="getInformationYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from information
+		order by year
+	</select>
+	
+	<select id="getStudentQualityList"  resultType="StudentQuality" parameterType="java.lang.String">
+		SELECT * FROM studentquality WHERE Audit = 1 
+		 <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if>
+        order by admcode,year   
+	</select>
+	
+	<select id="getStudentQualityYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from studentquality
+		order by year
+	</select>
+	
+	<select id="getExperienceList"  resultType="Experience" parameterType="java.lang.String">
+		SELECT * FROM experience WHERE Audit = 1 
+		 <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if>
+        order by admcode,year   
+	</select>
+	
+	<select id="getExperienceYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from experience
+		order by year
+	</select>
+	
+	<select id="getEmployQualityList"  resultType="EmployQuality" parameterType="java.lang.String">
+		SELECT * FROM employquality WHERE Audit = 1 
+		  <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if> 
+        order by admcode,year   
+	</select>
+	
+	<select id="getEmployQualityYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from employquality
+		order by year
+	</select>
+	
+	<select id="getMajorLayoutList"  resultType="MajorLayout" parameterType="java.lang.String">
+		SELECT * FROM majorlayout WHERE Audit = 1 
+		 <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if>
+        order by admcode,year      
+	</select>
+	
+	<select id="getMajorLayoutYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from majorlayout
+		order by year
+	</select>
+	
+	<select id="getMajorStuYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from majorstu
+		order by year
+	</select>
+	
+	<select id="getMajorNumList"  resultType="MajorNum" parameterType="java.lang.String">
+		SELECT * FROM majornum WHERE Audit = 1 
+		 <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if>
+        order by admcode,year      
+	</select>
+	
+	<select id="getMajorNumYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from majornum
+		order by year
+	</select>
+	
+	<select id="getQualityAssuranceList"  resultType="QualityAssurance" parameterType="java.lang.String">
+		SELECT * FROM qualityassure WHERE Audit = 1 
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if>
+        order by admcode,year      
+	</select>
+	
+	<select id="getQualityAssuranceYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from qualityassure
+		order by year
+	</select>
+	
+	<select id="getEducationTrainList"  resultType="EducationTrain" parameterType="java.lang.String">
+		SELECT * FROM educationtrain WHERE Audit = 1 
+		 <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if>
+        order by admcode,year       
+	</select>
+	
+	<select id="getEducationTrainYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from educationtrain
+		order by year
+	</select>
+	
+	<select id="getSchoolenterpriseList"  resultType="Schoolenterprise" parameterType="java.lang.String">
+		SELECT * FROM schoolenterprise WHERE Audit = 1 
+		 <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if>
+         order by admcode,year     
+	</select>
+	
+	<select id="getSchoolenterpriseYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from schoolenterprise
+		order by year
+	</select>
+	
+	<select id="getInternshipList"  resultType="Internship" parameterType="java.lang.String">
+		SELECT * FROM internship WHERE Audit = 1 
+		 <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if> 
+         order by admcode,year   
+	</select>
+	
+	<select id="getInternshipYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from internship
+		order by year
+	</select>
+	
+	<select id="getGroupschoolList"  resultType="Groupschool" parameterType="java.lang.String">
+		SELECT * FROM groupschool WHERE Audit = 1 
+		  <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if> 
+         order by admcode,year    
+	</select>
+	
+	<select id="getGroupschoolYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from groupschool
+		order by year
+	</select>
+	
+	<select id="getSkillTrainList"  resultType="SkillTrain" parameterType="java.lang.String">
+		SELECT * FROM skilltrain WHERE Audit = 1 
+		 <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if>
+        order by admcode,year     
+	</select>
+	
+	<select id="getSkillTrainYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from skilltrain
+		order by year
+	</select>
+	
+	<select id="getSkillList"  resultType="Skill" parameterType="int">
+		SELECT * FROM skill WHERE Audit = 1 AND
+		Admcode=(select Admcode from skilltrain where id = #{id}) 
+		AND 
+		Year=(select Year from skilltrain where id = #{id})
+		order by admcode,year  
+	</select>
+	
+	<select id="getSkillYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from skill
+		order by year
+	</select>
+	
+	<select id="getSocialServiceList"  resultType="SocialService" parameterType="java.lang.String">
+		SELECT * FROM socialservice WHERE Audit = 1 
+		 <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if> 
+        order by admcode,year   
+	</select>
+	
+	<select id="getSocialServiceYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from socialservice
+		order by year
+	</select>
+	
+	<select id="getCounpaSuppList"  resultType="CounpaSupp" parameterType="java.lang.String">
+		SELECT * FROM counpasupp WHERE Audit = 1 
+		  <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if> 
+        order by admcode,year   
+	</select>
+	
+	<select id="getCounpaSuppYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from counpasupp
+		order by year
+	</select>
+	
+	<select id="getPoorlList"  resultType="Poor" parameterType="int">
+		SELECT * FROM poor WHERE Audit = 1 AND
+		Admcode=(select Admcode from counpasupp where id = #{id}) 
+		AND 
+		Year=(select Year from counpasupp where id = #{id}) 
+		order by admcode,year 
+	</select>
+	
+	<select id="getPoorYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from poor
+		order by year
+	</select>
+	
+	<select id="getFundsList"  resultType="Funds" parameterType="java.lang.String">
+		SELECT * FROM funds WHERE Audit = 1 
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if>
+        order by admcode,year		        
+	</select>
+	
+	<select id="getFundsYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from funds
+		order by year
+	</select>
+	
+	<select id="getProjectInputYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from projectinput
+		order by year
+	</select>
+	
+	<select id="getPolicyList"  resultType="Policy" parameterType="java.lang.String">
+		SELECT * FROM policy WHERE Audit = 1 
+		 <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if>
+        order by admcode,year    
+	</select>
+	
+	<select id="getPolicyYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from policy
+		order by year
+	</select>
+	
+	<select id="getPolicyMeasureYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from policymeasure
+		order by year
+	</select>
+	
+	<select id="getPartybuildList"  resultType="Partybulid" parameterType="java.lang.String">
+		SELECT * FROM partybulid WHERE Audit = 1 
+		  <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+        </if>
+        order by admcode,year    
+	</select>
+	
+	<select id="getPartybulidYearList"  resultType="java.lang.String">
+		select distinct Year 
+		from partybulid
+		order by year
+	</select>
+	
+	<select id="getFileInfoList"  resultType="FileInfo" parameterType="java.lang.String">
+		SELECT * FROM fileinfo WHERE Audit = 1 
+		  <if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="admcode != null and admcode != ''">
+           AND `Writer` = #{admcode}
+        </if> 
+	</select>
+	
+	<select id="getSchoolName"  resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT SchoolName FROM schoolinfo WHERE Admcode = #{admcode}       
+	</select>
+	
+	<select id="getAreaList" resultType="java.lang.String">
+		SELECT SchoolName FROM user WHERE Level = 3
+		ORDER BY SchoolName
+	</select>
+	
+
+</mapper>

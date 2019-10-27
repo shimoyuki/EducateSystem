@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.PolicyMeasureDao">
+	
+	<select id="getPolicyMeasureList"  resultType="PolicyMeasure" parameterType="int">
+		SELECT * FROM policymeasure WHERE
+		Admcode=(select Admcode from policy where id = #{id}) 
+		AND 
+		Year=(select Year from policy where id = #{id}) 
+		order by admcode,year		
+	</select> 
+	
+    <insert id="savePolicyMeasure" parameterType="PolicyMeasure">
+	 	INSERT INTO policymeasure
+	 	(
+	 	 Admcode,
+	     Year,
+	     City,
+	 	 AutoRight,	 	 
+	 	 Level,
+	 	 Audit
+	 	 ) 
+	 	VALUES
+	 	(
+	 	#{admcode},
+	 	#{year},
+	 	#{city},
+	 	#{autoRight},
+	 	#{level},
+	 	0
+	 	) 
+	</insert>
+	
+    <delete id="deletePolicyMeasure" parameterType="PolicyMeasure">
+		DELETE FROM policymeasure WHERE Admcode=#{admcode} AND Year=#{year}
+	</delete>
+	
+	<update id="updateProjectInput" parameterType="PolicyMeasure">
+		UPDATE policymeasure SET 
+		 Year=#{year},
+		 AutoRight=#{autoRight},	 
+	 	 Level=#{level}
+		WHERE id=#{id}
+	</update>  
+	
+    <delete id="deletePolicyTable" parameterType="PolicyMeasure">
+		DELETE FROM policymeasure WHERE id=#{id}
+	</delete> 
+	
+	<update id="updateAudit" parameterType="int">
+		UPDATE policymeasure SET 
+	 	 Audit=1
+		WHERE
+		 Admcode=(select Admcode from policy where id = #{id}) 
+		AND 
+		 Year=(select Year from policy where id = #{id})  
+	</update> 
+	
+</mapper>

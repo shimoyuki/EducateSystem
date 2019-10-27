@@ -1,0 +1,5 @@
+value="\$\{(.*)\}"
+value="<fmt:formatNumber type="number" $0 maxFractionDigits="0" groupingUsed="false"/>"
+
+(<td>)(\$\{(.*)\})(</td>)
+<td><fmt:formatNumber type="number" value="$2" maxFractionDigits="0" groupingUsed="false"/></td>

@@ -1,0 +1,61 @@
+package com.jks.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.github.pagehelper.PageInfo;
+import com.jks.entity.SocialService;
+
+public interface SocialServiceService {
+	/**
+	 * 查询主键为sId的社会服务信息
+	 * 
+	 * @param sId
+	 * @return
+	 */
+	public SocialService getSocialServiceById(int sId);
+
+	/**
+	 * 添加社会服务信息
+	 * 
+	 * @param social
+	 * @return
+	 */
+	public boolean addSocialService(SocialService social);
+
+	/**
+	 * 删除社会服务信息
+	 * 
+	 * @param sId
+	 * @return
+	 */
+	public boolean deleteSocialService(int sId);
+
+	/**
+	 * 修改社会服务信息
+	 * 
+	 * @param social
+	 * @return
+	 */
+	public boolean modifySocialService(SocialService social);
+
+	/**
+	 * 分页查询社会服务信息
+	 * 
+	 * @param params
+	 *            包含pageNum，pageSize，year，admcode，city五个值，
+	 *            pageNum默认为1，查询首页，pageSize默认为12
+	 *            ，每页12条数据，year，admcode，city默认为空，为查询的条件
+	 * @return
+	 */
+	public PageInfo<SocialService> getSocialServicePage(
+			Map<String, Object> params);
+
+	/**
+	 * 查询市州下属所有学校的admcode
+	 * 
+	 * @param city
+	 * @return
+	 */
+	public List<String> getAdmcodeByCity(String city);
+}

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.TargetNameMapper">
+  <resultMap id="BaseResultMap" type="com.jks.entity.TargetName">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Field" jdbcType="VARCHAR" property="field" />
+    <result column="Source" jdbcType="VARCHAR" property="source" />
+    <result column="Measure" jdbcType="VARCHAR" property="measure" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, Name, Field, Source, Measure
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from targetname
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectBySource" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from targetname
+    where SOURCE = #{source,jdbcType=VARCHAR}
+  </select>
+  <select id="selectNameByField" resultType="java.lang.String">
+    select NAME
+    from targetname
+    where FIELD = #{field}
+    and SOURCE = #{source}
+  </select>
+  <select id="selectFieldByName" resultType="java.lang.String">
+    select FIELD
+    from targetname
+    where NAME = #{name}
+    and SOURCE = #{source}
+  </select>
+  <select id="selectMeasureByName" resultType="java.lang.String">
+    select MEASURE
+    from targetname
+    where NAME = #{name}
+    and SOURCE = #{source}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from targetname
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jks.entity.TargetName">
+    insert into targetname (ID, Name, Field, 
+      Source, Measure)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{field,jdbcType=VARCHAR}, 
+      #{source,jdbcType=VARCHAR}, #{measure,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jks.entity.TargetName">
+    insert into targetname
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="field != null">
+        Field,
+      </if>
+      <if test="source != null">
+        Source,
+      </if>
+      <if test="measure != null">
+        Measure,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="field != null">
+        #{field,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="measure != null">
+        #{measure,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jks.entity.TargetName">
+    update targetname
+    <set>
+      <if test="name != null">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="field != null">
+        Field = #{field,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        Source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="measure != null">
+        Measure = #{measure,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jks.entity.TargetName">
+    update targetname
+    set Name = #{name,jdbcType=VARCHAR},
+      Field = #{field,jdbcType=VARCHAR},
+      Source = #{source,jdbcType=VARCHAR},
+      Measure = #{measure,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

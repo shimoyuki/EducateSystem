@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.ChartAnalysisDao">
+	
+	<select id="getSizeList"  resultType="Size">
+		SELECT * FROM size WHERE 		 
+          Year = #{year}              
+        AND		
+		<foreach collection="area" index="index" item="item"  separator="OR">  
+          City LIKE CONCAT('%','${item}','%' )           
+        </foreach>
+        AND
+		<foreach collection="school" index="index" item="item"  separator="OR">  
+          Admcode LIKE CONCAT('%','${item}','%' )           
+        </foreach>     
+	</select>
+	
+	<select id="getSchoolList" parameterType="java.util.Map" resultType="java.lang.String">
+		SELECT Admcode FROM size WHERE 1=1
+		<if test="schoolrun!= null">AND schoolrun=#{schoolrun,jdbcType=VARCHAR}</if>
+		<if test="schoollevel!= null">AND schoollevel=#{schoollevel,jdbcType=VARCHAR}</if>
+		<if test="schoolsubject!= null">AND schoolsubject=#{schoolsubject,jdbcType=VARCHAR}</if>
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+	</select>
+	
+	<select id="getSchoolSize" resultType="Size">
+		SELECT * FROM size WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaSize" resultType="Size">
+		SELECT * FROM size WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolEquitment" resultType="Equitment">
+		SELECT * FROM equitment WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaEquitment" resultType="Equitment">
+		SELECT * FROM equitment WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolTeachers" resultType="Teachers">
+		SELECT * FROM teachers WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaTeachers" resultType="Teachers">
+		SELECT * FROM teachers WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolInformation" resultType="Information">
+		SELECT * FROM information WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaInformation" resultType="Information">
+		SELECT * FROM information WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolStudentQuality" resultType="StudentQuality">
+		SELECT * FROM studentquality WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaStudentQuality" resultType="StudentQuality">
+		SELECT * FROM studentquality WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolExperience" resultType="Experience">
+		SELECT * FROM experience WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaExperience" resultType="Experience">
+		SELECT * FROM experience WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolEmployQuality" resultType="EmployQuality">
+		SELECT * FROM employquality WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaEmployQuality" resultType="EmployQuality">
+		SELECT * FROM employquality WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolMajorLayout" resultType="MajorLayout">
+		SELECT * FROM majorlayout WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaMajorLayout" resultType="MajorLayout">
+		SELECT * FROM majorlayout WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolMajorNum" resultType="MajorNum">
+		SELECT * FROM majornum WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaMajorNum" resultType="MajorNum">
+		SELECT * FROM majornum WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolQualityAssurance" resultType="QualityAssurance">
+		SELECT * FROM qualityassure WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaQualityAssurance" resultType="QualityAssurance">
+		SELECT * FROM qualityassure WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolEducationTrain" resultType="EducationTrain">
+		SELECT * FROM educationtrain WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaEducationTrain" resultType="EducationTrain">
+		SELECT * FROM educationtrain WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolSchoolenterprise" resultType="Schoolenterprise">
+		SELECT * FROM schoolenterprise WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaSchoolenterprise" resultType="Schoolenterprise">
+		SELECT * FROM schoolenterprise WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolInternship" resultType="Internship">
+		SELECT * FROM internship WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaInternship" resultType="Internship">
+		SELECT * FROM internship WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolGroupschool" resultType="Groupschool">
+		SELECT * FROM groupschool WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaGroupschool" resultType="Groupschool">
+		SELECT * FROM groupschool WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolSkillTrain" resultType="SkillTrain">
+		SELECT * FROM skilltrain WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaSkillTrain" resultType="SkillTrain">
+		SELECT * FROM skilltrain WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolSocialService" resultType="SocialService">
+		SELECT * FROM socialservice WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaSocialService" resultType="SocialService">
+		SELECT * FROM socialservice WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolCounpaSupp" resultType="CounpaSupp">
+		SELECT * FROM counpasupp WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaCounpaSupp" resultType="CounpaSupp">
+		SELECT * FROM counpasupp WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolFunds" resultType="Funds">
+		SELECT * FROM funds WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaFunds" resultType="Funds">
+		SELECT * FROM funds WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolPolicy" resultType="Policy">
+		SELECT * FROM policy WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaPolicy" resultType="Policy">
+		SELECT * FROM policy WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getSchoolPartybulid" resultType="Partybulid">
+		SELECT * FROM partybulid WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) AND
+		Admcode LIKE CONCAT('%','${school}','%' )
+		AND Audit=1 ORDER BY Year
+	</select>
+	
+	<select id="getAreaPartybulid" resultType="Partybulid">
+		SELECT * FROM partybulid WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		<if test="city!= null">AND City LIKE CONCAT('%','${city}','%' )</if>
+		AND Audit=1 ORDER BY Year
+	</select>
+
+	<select id="getSchoolStandard" resultType="Standard">
+		SELECT * FROM standardview WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		) 
+		and Admcode LIKE CONCAT('%','${school}','%' )
+		ORDER BY Year
+	</select>
+
+	<select id="getAreaStandard" resultType="Standard">
+		SELECT * FROM standardview WHERE (
+		<foreach collection="year" index="index" item="item"
+			separator="OR">
+			Year = CONCAT('${item}')
+		</foreach>
+		)
+		<if test="city!= null">and City LIKE CONCAT('%','${city}','%' )</if>
+		ORDER BY Year
+	</select>
+	
+</mapper>

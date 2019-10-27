@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.DataSumAndAvgDao">
+		
+	<select id="getAreaList" resultType="java.lang.String">
+		SELECT SchoolName FROM user WHERE  Level = 3
+		<!-- ORDER BY SchoolName -->
+	</select>
+	
+	
+	<select id="getCitySize" resultType="Size">
+		SELECT * FROM size WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCityEquitment" resultType="Equitment">
+		SELECT * FROM equitment WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCityTeachers" resultType="Teachers">
+		SELECT * FROM teachers WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCityInformation" resultType="Information">
+		SELECT * FROM information WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCityStudentQuality" resultType="StudentQuality">
+		SELECT * FROM studentquality WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCityExperience" resultType="Experience">
+		SELECT * FROM experience WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCityEmployQuality" resultType="EmployQuality">
+		SELECT * FROM employquality WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCityMajorLayout" resultType="MajorLayout">
+		SELECT * FROM majorlayout WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCityMajorNum" resultType="MajorNum">
+		SELECT * FROM majornum WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCityQualityAssurance" resultType="QualityAssurance">
+		SELECT * FROM qualityassure WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCityEducationTrain" resultType="EducationTrain">
+		SELECT * FROM educationtrain WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCitySchoolenterprise" resultType="Schoolenterprise">
+		SELECT * FROM schoolenterprise WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCityInternship" resultType="Internship">
+		SELECT * FROM internship WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCityGroupschool" resultType="Groupschool">
+		SELECT * FROM groupschool WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCitySkillTrain" resultType="SkillTrain">
+		SELECT * FROM skilltrain WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCitySocialService" resultType="SocialService">
+		SELECT * FROM socialservice WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCityCounpaSupp" resultType="CounpaSupp">
+		SELECT * FROM counpasupp WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCityFunds" resultType="Funds">
+		SELECT * FROM funds WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+
+	
+	
+	
+	<select id="getCityPolicy" resultType="Policy">
+		SELECT * FROM policy WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+	
+	
+	
+	<select id="getCityPartybulid" resultType="Partybulid">
+		SELECT * FROM partybulid WHERE Audit = 1  
+		<if test="city!= null and city!=''">
+		    AND City LIKE CONCAT('%','${city}','%' )
+		</if>
+		<if test="year!= null and year!=''">
+			AND `Year` = #{year}
+		</if>
+		ORDER BY Year
+	</select>
+
+</mapper>

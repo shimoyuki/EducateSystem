@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.SchoolenterpriseMapper">
+	
+	<select id="getSchoolenterpriseList"  resultType="Schoolenterprise" parameterType="java.lang.String">
+		SELECT * FROM schoolenterprise 
+		<where>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+         </if>
+		 <if test="year != null and year != ''">
+           AND `Year` = #{year}
+         </if>
+       </where>
+	</select>
+	<select id="getSchoolenterpriseListByAdmin"  resultType="Schoolenterprise" parameterType="java.lang.String">
+		SELECT * FROM schoolenterprise 
+		Where Audit=1
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+         </if>
+		 <if test="year != null and year != ''">
+           AND `Year` = #{year}
+         </if>
+       
+	</select>
+	<select id="getByUsercodeAndYear" resultType="Schoolenterprise">
+	 	select * from schoolenterprise where Admcode=#{0} and Year=#{1}    
+	</select>
+	<select id="findById" parameterType="int" resultType="Schoolenterprise">    
+        select * from schoolenterprise where id=#{id}    
+    </select>
+    
+    <select id="findByCity"  resultType="Schoolenterprise" parameterType="java.lang.String">
+		SELECT * FROM schoolenterprise WHERE 
+		City LIKE CONCAT('%','${city}','%' ) 
+		<if test="year != null and year != ''">
+           AND `Year` = #{year}
+        </if>
+    </select> 
+     <select id="adminFindByCity"  resultType="Schoolenterprise" parameterType="java.lang.String">
+		SELECT * FROM schoolenterprise WHERE Audit=1 AND
+		City LIKE CONCAT('%','${city}','%' ) 
+		<if test="year != null and year != ''">
+           AND `Year` = #{year}
+        </if>
+    </select>
+    <update id="updateSchoolenterprise" parameterType="Schoolenterprise">
+		update schoolenterprise
+    set 
+    
+      Year = #{year,jdbcType=VARCHAR},
+    
+      MajorNum = #{majornum,jdbcType=INTEGER},
+      CoopAgreeEnterp = #{coopagreeenterp,jdbcType=INTEGER},
+      CoopAgreeMajor = #{coopagreemajor,jdbcType=INTEGER},
+      CoopEnterpJoinTeachMajor = #{coopenterpjointeachmajor,jdbcType=INTEGER},
+      CoopEnterpJoinTeachTeacher = #{coopenterpjointeachteacher,jdbcType=INTEGER},
+      CoopEnterpJoinTeachClass = #{coopenterpjointeachclass,jdbcType=INTEGER},
+      CoopEnterpFund = #{coopenterpfund,jdbcType=DECIMAL},
+      CoopEnterpArrivalFund = #{coopenterparrivalfund,jdbcType=DECIMAL},
+      CoopEnterpEquitWorth = #{coopenterpequitworth,jdbcType=DECIMAL},
+      EnterpBuildReseaDevelop = #{enterpbuildreseadevelop,jdbcType=INTEGER},
+      OffSchoTeacherTrainBase = #{offschoteachertrainbase,jdbcType=INTEGER},
+      ProdTrainBaseVal = #{prodtrainbaseval,jdbcType=DECIMAL},
+      SchoEnterpCoopOrderClassNum = #{schoenterpcooporderclassnum,jdbcType=INTEGER},
+      SchoEnterpDevelopCourse = #{schoenterpdevelopcourse,jdbcType=INTEGER},
+      FullEnterPrac = #{fullenterprac,jdbcType=DECIMAL},
+      FullEnterTime = #{fullentertime,jdbcType=DECIMAL},
+      PartTimeClassRadio = #{parttimeclassradio,jdbcType=VARCHAR}
+      
+		WHERE id=#{id}
+	</update> 
+	<update id="updateAudit" parameterType="int">
+		UPDATE schoolenterprise SET 
+	 	 Audit=1
+		WHERE id=#{id}
+	</update>
+	<delete id="deleteSchoolenterprise" parameterType="Schoolenterprise">
+		DELETE FROM schoolenterprise WHERE id=#{id}
+	</delete>
+	
+	<insert id="saveSchoolenterprise" parameterType="Schoolenterprise">
+		insert into schoolenterprise (ID, Admcode, Year, 
+      City, MajorNum, CoopAgreeEnterp, 
+      CoopAgreeMajor, CoopEnterpJoinTeachMajor, 
+      CoopEnterpJoinTeachTeacher, CoopEnterpJoinTeachClass, 
+      CoopEnterpFund, CoopEnterpArrivalFund, 
+      CoopEnterpEquitWorth, EnterpBuildReseaDevelop, 
+      OffSchoTeacherTrainBase, 
+      ProdTrainBaseVal, SchoEnterpCoopOrderClassNum, 
+      SchoEnterpDevelopCourse, FullEnterPrac, 
+      FullEnterTime, PartTimeClassRadio, Audit)
+    values (#{id,jdbcType=INTEGER}, #{admcode,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{majornum,jdbcType=INTEGER}, #{coopagreeenterp,jdbcType=INTEGER}, 
+      #{coopagreemajor,jdbcType=INTEGER}, #{coopenterpjointeachmajor,jdbcType=INTEGER}, 
+      #{coopenterpjointeachteacher,jdbcType=INTEGER}, #{coopenterpjointeachclass,jdbcType=INTEGER}, 
+      #{coopenterpfund,jdbcType=DECIMAL}, #{coopenterparrivalfund,jdbcType=DECIMAL}, 
+      #{coopenterpequitworth,jdbcType=DECIMAL}, #{enterpbuildreseadevelop,jdbcType=INTEGER}, 
+      #{offschoteachertrainbase,jdbcType=INTEGER}, 
+      #{prodtrainbaseval,jdbcType=DECIMAL}, #{schoenterpcooporderclassnum,jdbcType=INTEGER}, 
+      #{schoenterpdevelopcourse,jdbcType=INTEGER}, #{fullenterprac,jdbcType=DECIMAL}, 
+      #{fullentertime,jdbcType=DECIMAL}, #{parttimeclassradio,jdbcType=VARCHAR}, 0)
+	</insert>
+	 
+	<select id="checkYear" parameterType="Schoolenterprise" resultType="java.lang.Integer">
+		select count(*) from schoolenterprise where Year=#{year} and Admcode=#{admcode}
+	</select>
+</mapper>

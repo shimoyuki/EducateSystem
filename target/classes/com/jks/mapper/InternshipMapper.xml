@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.InternMapper">
+	
+	<select id="getInternshipList"  resultType="Internship" parameterType="java.lang.String">
+		SELECT * FROM internship 
+		<where>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+         </if>
+		 <if test="year != null and year != ''">
+           AND `Year` = #{year}
+         </if>
+       </where>
+	</select>
+	<select id="getInternshipListByAdmin"  resultType="Internship" parameterType="java.lang.String">
+		SELECT * FROM internship 
+		where Audit=1
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+         </if>
+		 <if test="year != null and year != ''">
+           AND `Year` = #{year}
+         </if>
+       
+	</select>
+	<select id="getByUsercodeAndYear" resultType="Internship">
+	 	select * from internship where Admcode=#{0} and Year=#{1}    
+	</select>
+	<select id="findById" parameterType="int" resultType="Internship">    
+        select * from internship where id=#{id}    
+    </select>
+     <select id="findByCity"  resultType="Internship" parameterType="java.lang.String">
+		SELECT * FROM internship WHERE 
+		City LIKE CONCAT('%','${city}','%' ) 
+		<if test="year != null and year != ''">
+           AND `Year` = #{year}
+        </if>
+    </select>
+     <select id="adminFindByCity"  resultType="Internship" parameterType="java.lang.String">
+		SELECT * FROM internship WHERE Audit=1 AND
+		City LIKE CONCAT('%','${city}','%' ) 
+		<if test="year != null and year != ''">
+           AND `Year` = #{year}
+        </if>
+    </select>
+    <update id="updateAudit" parameterType="int">
+		UPDATE internship SET 
+	 	 Audit=1
+		WHERE id=#{id}
+	</update> 
+    <update id="updateInternship" parameterType="Internship">
+		update internship
+    <set >
+      <if test="admcode != null" >
+        Admcode = #{admcode,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        City = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="offcampttrainbase != null" >
+        OffCamptTrainBase = #{offcampttrainbase,jdbcType=VARCHAR},
+      </if>
+      <if test="kownduration != null" >
+        KownDuration = #{kownduration,jdbcType=VARCHAR},
+      </if>
+      <if test="postduration != null" >
+        PostDuration = #{postduration,jdbcType=VARCHAR},
+      </if>
+      <if test="displaceduration != null" >
+        DisplaceDuration = #{displaceduration,jdbcType=VARCHAR},
+      </if>
+      <if test="stupostpartradio != null" >
+        StuPostPartRadio = #{stupostpartradio,jdbcType=VARCHAR},
+      </if>
+      <if test="studispartradio != null" >
+        StuDisPartRadio = #{studispartradio,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpassessdisopt != null" >
+        EnterpAssessDisOpt = #{enterpassessdisopt,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpassessdisgood != null" >
+        EnterpAssessDisGood = #{enterpassessdisgood,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpassessdisinter != null" >
+        EnterpAssessDisInter = #{enterpassessdisinter,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpassessdisbad != null" >
+        EnterpAssessDisBad = #{enterpassessdisbad,jdbcType=VARCHAR},
+      </if>
+      <if test="coopenterpemploystud != null" >
+        CoopEnterpEmployStud = #{coopenterpemploystud,jdbcType=VARCHAR},
+      </if>
+     
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+	</update> 
+	<delete id="deleteInternship" parameterType="Internship">
+		DELETE FROM internship WHERE id=#{id}
+	</delete>
+	
+	<insert id="saveInternship" parameterType="Internship">
+		insert into internship (ID, Admcode, Year, 
+      City, OffCamptTrainBase, KownDuration, 
+      PostDuration, DisplaceDuration, StuPostPartRadio, 
+      StuDisPartRadio, EnterpAssessDisOpt, EnterpAssessDisGood, 
+      EnterpAssessDisInter, EnterpAssessDisBad, 
+      CoopEnterpEmployStud, Audit)
+    values (#{id,jdbcType=INTEGER}, #{admcode,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{offcampttrainbase,jdbcType=VARCHAR}, #{kownduration,jdbcType=VARCHAR}, 
+      #{postduration,jdbcType=VARCHAR}, #{displaceduration,jdbcType=VARCHAR}, #{stupostpartradio,jdbcType=VARCHAR}, 
+      #{studispartradio,jdbcType=VARCHAR}, #{enterpassessdisopt,jdbcType=VARCHAR}, #{enterpassessdisgood,jdbcType=VARCHAR}, 
+      #{enterpassessdisinter,jdbcType=VARCHAR}, #{enterpassessdisbad,jdbcType=VARCHAR}, 
+      #{coopenterpemploystud,jdbcType=VARCHAR}, 0)
+			 
+	</insert>
+	 
+	<select id="checkYear" parameterType="Internship" resultType="java.lang.Integer">
+		select count(*) from internship where Year=#{year} and Admcode=#{admcode}
+	</select>
+	
+</mapper>

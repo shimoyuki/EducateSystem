@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.MajorStuDao">
+	
+	<select id="getMajorStuList"  resultType="MajorStu" parameterType="int">
+		SELECT * FROM majorStu WHERE
+		Admcode=(select Admcode from majorlayout where id = #{id}) 
+		AND 
+		Year=(select Year from majorlayout where id = #{id})
+		order by admcode,year   		
+	</select>
+	
+    <insert id="saveMajorStu" parameterType="MajorStu">
+	 	INSERT INTO majorstu
+	 	(
+	 	 Admcode,
+	     Year,
+	     City,
+	 	 InduName,
+	 	 Name,	 	 
+	 	 FirstGradeSum,
+	 	 SecGradeSum,
+	 	 ThirdGradeSum,
+	 	 Audit
+	 	 ) 
+	 	VALUES
+	 	(
+	 	#{admcode},
+	 	#{year},
+	 	#{city},
+	 	#{induName},
+	 	#{name},
+	 	#{firstGradeSum},
+	 	#{secGradeSum},
+	 	#{thirdGradeSum},
+	 	0
+	 	) 
+	</insert>
+	
+    <delete id="deleteMajorStu" parameterType="MajorStu">
+		DELETE FROM majorstu WHERE Admcode=#{admcode} AND Year=#{year}
+	</delete>
+	
+	
+	
+	<update id="updateMajorStu" parameterType="MajorStu">
+		UPDATE majorstu SET 
+		 Year=#{year},
+		 InduName=#{induName},
+	 	 Name=#{name},	 	 
+	 	 FirstGradeSum=#{firstGradeSum},
+	 	 SecGradeSum=#{secGradeSum},
+	 	 ThirdGradeSum=#{thirdGradeSum}
+		WHERE id=#{id}
+	</update>  
+	
+	<delete id="deleteMajorStuTable" parameterType="MajorStu">
+		DELETE FROM majorstu WHERE id=#{id}
+	</delete>
+	
+	<update id="updateAudit" parameterType="int">
+		UPDATE majorstu SET 
+	 	 Audit=1
+		WHERE 
+		 Admcode=(select Admcode from majorlayout where id = #{id}) 
+		AND 
+		 Year=(select Year from majorlayout where id = #{id})
+	</update>
+	
+</mapper>

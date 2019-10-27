@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.PolicyDao">
+	
+	<select id="getPolicysList"  resultType="Policy" parameterType="java.lang.String">
+		SELECT * FROM policy  WHERE 1 = 1
+		 <if test="year != null and year != ''">
+           AND `Year` = #{year}
+         </if>
+         <if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+         </if>
+	</select>
+	
+    <insert id="savePolicy" parameterType="Policy">
+	 	INSERT INTO policy
+	 	(
+	 	 Admcode,
+	 	 Year,
+	 	 city,
+	 	 Teacher,
+	 	 Audit
+	 	 ) 
+	 	VALUES
+	 	(
+	 	#{admcode},
+		#{year},
+		#{city},
+	 	#{teacher},
+	    0 
+	 	) 
+	</insert>
+	
+	<delete id="deletePolicy" parameterType="Policy">
+		DELETE FROM policy WHERE id=#{id}
+	</delete>
+	
+	<select id="findById" parameterType="int" resultType="Policy">    
+        select * from policy where id=#{id}    
+    </select> 
+	
+	<update id="updatePolicy" parameterType="Policy">
+		UPDATE policy SET 
+		 Year=#{year},
+	 	 Teacher=#{teacher}
+		WHERE id=#{id}
+	</update>  
+	
+	<update id="updateAudit" parameterType="int">
+		UPDATE policy SET 
+	 	 Audit=1
+		WHERE id=#{id}
+	</update> 
+	
+	<select id="findByCity"  resultType="Policy" parameterType="java.lang.String">
+		SELECT * FROM policy WHERE 
+		City LIKE CONCAT('%','${city}','%' ) 
+		<if test="year != null and year != ''">
+           AND `Year` = #{year}
+        </if>
+    </select> 
+    
+    <select id="checkYear" parameterType="Policy" resultType="java.lang.Integer">
+		select count(*) from policy where Year=#{year} and Admcode=#{admcode}
+	</select>
+	
+</mapper>

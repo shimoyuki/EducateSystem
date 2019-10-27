@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.MajorLayoutDao">
+	
+	<select id="getMajorLayoutList"  resultType="MajorLayout" parameterType="java.lang.String">
+		SELECT * FROM majorlayout WHERE 1 = 1
+		 <if test="year != null and year != ''">
+           AND `Year` = #{year}
+         </if>
+         <if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+         </if>
+	</select>
+	
+    <insert id="saveMajorLayout" parameterType="MajorLayout">
+	 	INSERT INTO majorlayout
+	 	(
+	 	 Admcode,
+	 	 Year,
+	 	 city,
+	 	 OneIndu,
+	 	 TwoIndu,
+	 	 ThreeIndu,
+	 	 LocalPillar,
+	 	 NewMajor,
+	 	 StopMajor,
+	 	 Audit
+	 	 ) 
+	 	VALUES
+	 	(
+	 	#{admcode},
+	 	#{year},
+	 	#{city},
+	 	#{oneIndu},
+	 	#{twoIndu},
+	 	#{threeIndu},
+	 	#{localPillar},
+	 	#{newMajor},
+	 	#{stopMajor},
+	 	0
+	 	) 
+	</insert>
+	
+	<delete id="deleteMajorLayout" parameterType="MajorLayout">
+		DELETE FROM majorlayout WHERE id=#{id}
+	</delete>
+	
+	<select id="findById" parameterType="int" resultType="MajorLayout">    
+        select * from majorlayout where id=#{id}    
+    </select> 
+	
+	<update id="updateMajorLayout" parameterType="MajorLayout">				
+		UPDATE majorlayout SET 
+		 Year=#{year},
+	 	 OneIndu=#{oneIndu},
+	 	 TwoIndu=#{twoIndu},
+	 	 ThreeIndu=#{threeIndu},
+	 	 LocalPillar=#{localPillar},
+	 	 NewMajor=#{newMajor},
+	 	 StopMajor=#{stopMajor}	 	 
+		WHERE id=#{id}		
+	</update>
+	
+	<update id="updateAudit" parameterType="int">
+		UPDATE majorlayout SET 
+	 	 Audit=1
+		WHERE id=#{id}
+	</update> 
+	
+	<select id="findByCity"  resultType="MajorLayout" parameterType="java.lang.String">
+		SELECT * FROM majorlayout WHERE 
+		City LIKE CONCAT('%','${city}','%' ) 
+		<if test="year != null and year != ''">
+           AND `Year` = #{year}
+        </if>
+    </select>   
+	
+	<select id="checkYear" parameterType="MajorLayout" resultType="java.lang.Integer">
+		select count(*) from majorlayout where Year=#{year} and Admcode=#{admcode}
+	</select>
+</mapper>

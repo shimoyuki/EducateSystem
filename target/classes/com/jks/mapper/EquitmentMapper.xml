@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.EquitmentDao">
+	
+	<select id="getEquitmentList"  resultType="Equitment" parameterType="java.lang.String">
+		SELECT * FROM equitment 
+		<where>
+		  <if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+         </if>
+		 <if test="year != null and year != ''">
+           AND `Year` = #{year}
+         </if>
+       </where>
+	</select>
+	<select id="getEquitmentListByAdmin"  resultType="Equitment" parameterType="java.lang.String">
+		SELECT * FROM equitment 
+		WHERE Audit=1 
+		  <if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+         </if>
+		 <if test="year != null and year != ''">
+           AND `Year` = #{year}
+         </if>
+       
+	</select>
+	<select id="getByUsercodeAndYear" resultType="Equitment">
+	 	select * from equitment where Admcode=#{0} and Year=#{1}    
+	</select>
+	<select id="findById" parameterType="int" resultType="Equitment">    
+        select * from equitment where id=#{id}    
+    </select>
+    
+    <update id="updateAudit" parameterType="int">
+		UPDATE equitment SET 
+	 	 Audit=1
+		WHERE id=#{id}
+	</update>
+	
+	<select id="findByCity"  resultType="Equitment" parameterType="java.lang.String">
+		SELECT * FROM equitment WHERE 
+		City LIKE CONCAT('%','${city}','%' ) 
+		<if test="year != null and year != ''">
+           AND `Year` = #{year}
+        </if>
+    </select> 
+    <select id="adminFindByCity"  resultType="Equitment" parameterType="java.lang.String">
+		SELECT * FROM equitment WHERE Audit=1 AND
+		City LIKE CONCAT('%','${city}','%' ) 
+		<if test="year != null and year != ''">
+           AND `Year` = #{year}
+        </if>
+    </select> 
+    <update id="updateEquitment" parameterType="Equitment">
+		UPDATE equitment SET 
+		 Year=#{year},
+	 	 TotalAssertWorth=#{totalAssertWorth},
+	 	 TeacEquitWorth=#{teacEquitWorth},
+	 	 TrainEquitWorth=#{trainEquitWorth},
+	 	 YearTeacEquitWorth=#{yearTeacEquitWorth},
+	 	 YearTrainEquitWorth=#{yearTrainEquitWorth},
+	 	 StuTracEquitWorth=#{stuTracEquitWorth},
+	 	 StuTrainEquitWorth=#{stuTrainEquitWorth},
+	 	 TraPracWorkPe=#{traPracWorkPe},
+	 	 InTrainBase=#{inTrainBase},
+	 	 OutTrainBase=#{outTrainBase},
+	 	 LibBooks=#{libBooks},
+	 	 LibBooksElec=#{libBooksElec},
+	 	 YearBooks=#{yearBooks},
+	 	 ReadSeats=#{readSeats},
+	 	 StuBook=#{stuBook},
+	 	 SubScribs=#{subScribs},
+	 	 ElecBooks=#{elecBooks},
+	 	 ElecSeats=#{elecSeats}
+	 	 
+		WHERE id=#{id}
+	</update> 
+	
+	<delete id="deleteEquitment" parameterType="Equitment">
+		DELETE FROM equitment WHERE id=#{id}
+	</delete>
+	
+	<insert id="saveEquitment" parameterType="Equitment">
+		INSERT INTO equitment(
+			Admcode,
+			Year,
+			City,
+			TotalAssertWorth,
+			TeacEquitWorth,
+			TrainEquitWorth,
+			YearTeacEquitWorth,
+			YearTrainEquitWorth,
+			StuTracEquitWorth,
+			StuTrainEquitWorth,
+			TraPracWorkPe,
+			InTrainBase,
+			OutTrainBase,
+	 	 	LibBooks,
+	 	 	LibBooksElec,
+	 	 	YearBooks,
+	 	 	ReadSeats,
+	 	 	StuBook,
+	 	 	SubScribs,
+	 	 	ElecBooks,
+	 	 	ElecSeats,
+	 	 	Audit
+		)
+		VALUES(
+			#{admcode},
+			#{year},
+			#{city},
+	 	 	#{totalAssertWorth},
+	 		#{teacEquitWorth},
+	 	 	#{trainEquitWorth},
+	 	 	#{yearTeacEquitWorth},
+	 	 	#{yearTrainEquitWorth},
+	 	 	#{stuTracEquitWorth},
+	 	 	#{stuTrainEquitWorth},
+	 	 	#{traPracWorkPe},
+	 	 	#{inTrainBase},
+	 	 	#{outTrainBase},
+	 	 	#{libBooks},
+	 	 	#{libBooksElec},
+	 	 	#{yearBooks},
+	 	 	#{readSeats},
+	 	 	#{stuBook},
+	 	 	#{subScribs},
+	 	 	#{elecBooks},
+	 		#{elecSeats},
+	 		0
+		)	 
+	</insert>
+	
+	<select id="checkYear" parameterType="Equitment" resultType="java.lang.Integer">
+		select count(*) from equitment where Year=#{year} and Admcode=#{admcode}
+	</select>
+	 	
+</mapper>

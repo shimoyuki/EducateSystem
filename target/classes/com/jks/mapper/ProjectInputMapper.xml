@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.ProjectInputDao">
+	
+	<select id="getProjectInputList"  resultType="ProjectInput" parameterType="int">
+		SELECT * FROM projectinput WHERE
+		Admcode=(select Admcode from funds where id = #{id}) 
+		AND 
+		Year=(select Year from funds where id = #{id})
+		order by admcode,year 		
+	</select> 
+	
+    <insert id="saveProjectInput" parameterType="ProjectInput">
+	 	INSERT INTO projectinput
+	 	(
+	 	 Admcode,
+	     Year,
+	     City,
+	 	 Name,	 	 
+	 	 Funds,
+	 	 Type,
+	 	 Audit
+	 	 ) 
+	 	VALUES
+	 	(
+	 	#{admcode},
+	 	#{year},
+	 	#{city},
+	 	#{name},
+	 	#{funds},
+	 	#{type},
+	 	0
+	 	) 
+	</insert>
+	
+    <delete id="deleteProjectInput" parameterType="ProjectInput">
+		DELETE FROM projectinput WHERE Admcode=#{admcode} AND Year=#{year}
+	</delete>
+	
+	<update id="updateProjectInput" parameterType="ProjectInput">
+		UPDATE projectinput SET 
+		 Year=#{year},
+		 Type=#{type},
+	 	 Name=#{name},	 	 
+	 	 Funds=#{funds}
+		WHERE id=#{id}
+	</update>  
+	
+    <delete id="deleteFundsTable" parameterType="ProjectInput">
+		DELETE FROM projectinput WHERE id=#{id}
+	</delete> 
+	
+	<update id="updateAudit" parameterType="int">
+		UPDATE projectinput SET 
+	 	 Audit=1
+		WHERE 
+		 Admcode=(select Admcode from funds where id = #{id}) 
+		AND 
+		 Year=(select Year from funds where id = #{id}) 
+	</update>
+	
+</mapper>

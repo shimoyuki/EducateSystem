@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.InformationMapper">
+  <resultMap id="BaseResultMap" type="com.jks.entity.Information">
+    
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="Admcode" jdbcType="VARCHAR" property="admcode" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="City" jdbcType="VARCHAR" property="city" />
+    <result column="EducateInfo" jdbcType="INTEGER" property="educateinfo" />
+    <!-- <result column="Server" jdbcType="INTEGER" property="server" /> -->
+    <result column="NetworkNum" jdbcType="INTEGER" property="networknum" />
+    <result column="NetworkMain" jdbcType="INTEGER" property="networkmain" />
+    <result column="VideoStu" jdbcType="DECIMAL" property="videostu" />
+    <!-- <result column="NetMulRooms" jdbcType="INTEGER" property="netmulrooms" />
+    <result column="OnlineCourse" jdbcType="INTEGER" property="onlinecourse" /> -->
+    <result column="ElecBookStu" jdbcType="DECIMAL" property="elecbookstu" />
+    <result column="TeacComputer" jdbcType="INTEGER" property="teaccomputer" />
+    <result column="TeacCompStu" jdbcType="DECIMAL" property="teaccompstu" />
+    <result column="Collaboration" jdbcType="INTEGER" property="collaboration" />
+    <result column="PortalSite" jdbcType="INTEGER" property="portalsite" />
+    <result column="EducateManage" jdbcType="INTEGER" property="educatemanage" />
+    <result column="ClassInfo" jdbcType="INTEGER" property="classinfo" />
+    <result column="ClassVideo" jdbcType="INTEGER" property="classvideo" />
+    <result column="LearnApp" jdbcType="INTEGER" property="learnapp" />
+    <result column="SharedApp" jdbcType="INTEGER" property="sharedapp" />
+    <result column="Audit" jdbcType="INTEGER" property="audit" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    
+    ID, Admcode, Year, City, EducateInfo,  NetworkNum, NetworkMain, VideoStu, 
+    ElecBookStu, TeacComputer, TeacCompStu, Collaboration, 
+    PortalSite, EducateManage, ClassInfo, ClassVideo, LearnApp, SharedApp, Audit
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    
+    select 
+    <include refid="Base_Column_List" />
+    from information
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAdmcodeByCity" parameterType="java.lang.String" resultType="java.lang.String">
+		select Admcode 
+		from Information 
+		where city like #{city,jdbcType=VARCHAR}
+  </select>
+ <select id="query" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from information where 1=1
+		<if test="year!= null">and year=#{year,jdbcType=VARCHAR}</if>
+		<if test="admcode!= null">and admcode=#{admcode,jdbcType=VARCHAR}</if>
+		<if test="city!= null">and city like #{city,jdbcType=VARCHAR}</if>
+		<if test="audit!= null">and audit=#{audit,jdbcType=INTEGER}</if>
+	</select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+   
+    delete from information
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jks.entity.Information">
+  
+    insert into information (ID, Admcode, Year, 
+      City, EducateInfo, 
+      NetworkNum, NetworkMain, VideoStu, 
+      ElecBookStu, 
+      TeacComputer, TeacCompStu, Collaboration, 
+      PortalSite, EducateManage, ClassInfo, 
+      ClassVideo, LearnApp, SharedApp, 
+      Audit)
+    values (#{id,jdbcType=INTEGER}, #{admcode,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{educateinfo,jdbcType=INTEGER}, 
+      #{networknum,jdbcType=INTEGER}, #{networkmain,jdbcType=INTEGER}, #{videostu,jdbcType=DECIMAL}, 
+      #{elecbookstu,jdbcType=DECIMAL}, 
+      #{teaccomputer,jdbcType=INTEGER}, #{teaccompstu,jdbcType=DECIMAL}, #{collaboration,jdbcType=INTEGER}, 
+      #{portalsite,jdbcType=INTEGER}, #{educatemanage,jdbcType=INTEGER}, #{classinfo,jdbcType=INTEGER}, 
+      #{classvideo,jdbcType=INTEGER}, #{learnapp,jdbcType=INTEGER}, #{sharedapp,jdbcType=INTEGER}, 
+      #{audit,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jks.entity.Information">
+   
+    insert into information
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="admcode != null">
+        Admcode,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="city != null">
+        City,
+      </if>
+      <if test="educateinfo != null">
+        EducateInfo,
+      </if>
+      
+      <if test="networknum != null">
+        NetworkNum,
+      </if>
+      <if test="networkmain != null">
+        NetworkMain,
+      </if>
+      <if test="videostu != null">
+        VideoStu,
+      </if>
+      
+      <if test="elecbookstu != null">
+        ElecBookStu,
+      </if>
+      <if test="teaccomputer != null">
+        TeacComputer,
+      </if>
+      <if test="teaccompstu != null">
+        TeacCompStu,
+      </if>
+      <if test="collaboration != null">
+        Collaboration,
+      </if>
+      <if test="portalsite != null">
+        PortalSite,
+      </if>
+      <if test="educatemanage != null">
+        EducateManage,
+      </if>
+      <if test="classinfo != null">
+        ClassInfo,
+      </if>
+      <if test="classvideo != null">
+        ClassVideo,
+      </if>
+      <if test="learnapp != null">
+        LearnApp,
+      </if>
+      <if test="sharedapp != null">
+        SharedApp,
+      </if>
+      <if test="audit != null">
+        Audit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="admcode != null">
+        #{admcode,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="educateinfo != null">
+        #{educateinfo,jdbcType=INTEGER},
+      </if>
+      <if test="networknum != null">
+        #{networknum,jdbcType=INTEGER},
+      </if>
+      <if test="networkmain != null">
+        #{networkmain,jdbcType=INTEGER},
+      </if>
+      <if test="videostu != null">
+        #{videostu,jdbcType=DECIMAL},
+      </if>
+      <if test="elecbookstu != null">
+        #{elecbookstu,jdbcType=DECIMAL},
+      </if>
+      <if test="teaccomputer != null">
+        #{teaccomputer,jdbcType=INTEGER},
+      </if>
+      <if test="teaccompstu != null">
+        #{teaccompstu,jdbcType=DECIMAL},
+      </if>
+      <if test="collaboration != null">
+        #{collaboration,jdbcType=INTEGER},
+      </if>
+      <if test="portalsite != null">
+        #{portalsite,jdbcType=INTEGER},
+      </if>
+      <if test="educatemanage != null">
+        #{educatemanage,jdbcType=INTEGER},
+      </if>
+      <if test="classinfo != null">
+        #{classinfo,jdbcType=INTEGER},
+      </if>
+      <if test="classvideo != null">
+        #{classvideo,jdbcType=INTEGER},
+      </if>
+      <if test="learnapp != null">
+        #{learnapp,jdbcType=INTEGER},
+      </if>
+      <if test="sharedapp != null">
+        #{sharedapp,jdbcType=INTEGER},
+      </if>
+      <if test="audit != null">
+        #{audit,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jks.entity.Information">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+    -->
+    update information
+    <set>
+      <if test="admcode != null">
+        Admcode = #{admcode,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        City = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="educateinfo != null">
+        EducateInfo = #{educateinfo,jdbcType=INTEGER},
+      </if>
+      <if test="networknum != null">
+        NetworkNum = #{networknum,jdbcType=INTEGER},
+      </if>
+      <if test="networkmain != null">
+        NetworkMain = #{networkmain,jdbcType=INTEGER},
+      </if>
+      <if test="videostu != null">
+        VideoStu = #{videostu,jdbcType=DECIMAL},
+      </if>
+      <if test="elecbookstu != null">
+        ElecBookStu = #{elecbookstu,jdbcType=DECIMAL},
+      </if>
+      <if test="teaccomputer != null">
+        TeacComputer = #{teaccomputer,jdbcType=INTEGER},
+      </if>
+      <if test="teaccompstu != null">
+        TeacCompStu = #{teaccompstu,jdbcType=DECIMAL},
+      </if>
+      <if test="collaboration != null">
+        Collaboration = #{collaboration,jdbcType=INTEGER},
+      </if>
+      <if test="portalsite != null">
+        PortalSite = #{portalsite,jdbcType=INTEGER},
+      </if>
+      <if test="educatemanage != null">
+        EducateManage = #{educatemanage,jdbcType=INTEGER},
+      </if>
+      <if test="classinfo != null">
+        ClassInfo = #{classinfo,jdbcType=INTEGER},
+      </if>
+      <if test="classvideo != null">
+        ClassVideo = #{classvideo,jdbcType=INTEGER},
+      </if>
+      <if test="learnapp != null">
+        LearnApp = #{learnapp,jdbcType=INTEGER},
+      </if>
+      <if test="sharedapp != null">
+        SharedApp = #{sharedapp,jdbcType=INTEGER},
+      </if>
+      <if test="audit != null">
+        Audit = #{audit,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jks.entity.Information">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+    -->
+    update information
+    set Admcode = #{admcode,jdbcType=VARCHAR},
+      Year = #{year,jdbcType=VARCHAR},
+      City = #{city,jdbcType=VARCHAR},
+      EducateInfo = #{educateinfo,jdbcType=INTEGER},
+   
+      NetworkNum = #{networknum,jdbcType=INTEGER},
+      NetworkMain = #{networkmain,jdbcType=INTEGER},
+      VideoStu = #{videostu,jdbcType=DECIMAL},
+     
+      ElecBookStu = #{elecbookstu,jdbcType=DECIMAL},
+      TeacComputer = #{teaccomputer,jdbcType=INTEGER},
+      TeacCompStu = #{teaccompstu,jdbcType=DECIMAL},
+      Collaboration = #{collaboration,jdbcType=INTEGER},
+      PortalSite = #{portalsite,jdbcType=INTEGER},
+      EducateManage = #{educatemanage,jdbcType=INTEGER},
+      ClassInfo = #{classinfo,jdbcType=INTEGER},
+      ClassVideo = #{classvideo,jdbcType=INTEGER},
+      LearnApp = #{learnapp,jdbcType=INTEGER},
+      SharedApp = #{sharedapp,jdbcType=INTEGER},
+      Audit = #{audit,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

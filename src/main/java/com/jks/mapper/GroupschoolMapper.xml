@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.GroupSchoolMapper">
+	
+	<select id="getGroupschoolList"  resultType="Groupschool" parameterType="java.lang.String">
+		SELECT * FROM groupschool 
+		<where>
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+         </if>
+		 <if test="year != null and year != ''">
+           AND `Year` = #{year}
+         </if>
+       </where>
+	</select>
+	<select id="getGroupschoolListByAdmin"  resultType="Groupschool" parameterType="java.lang.String">
+		SELECT * FROM groupschool 
+		where Audit=1
+		<if test="admcode != null and admcode != ''">
+           AND `Admcode` = #{admcode}
+         </if>
+		 <if test="year != null and year != ''">
+           AND `Year` = #{year}
+         </if>
+       
+	</select>
+	<select id="getByUsercodeAndYear" resultType="Groupschool">
+	 	select * from groupschool where Admcode=#{0} and Year=#{1}    
+	</select>
+	<select id="findById" parameterType="int" resultType="Groupschool">    
+        select * from groupschool where id=#{id}    
+    </select>
+      <select id="findByCity"  resultType="Groupschool" parameterType="java.lang.String">
+		SELECT * FROM groupschool WHERE 
+		City LIKE CONCAT('%','${city}','%' ) 
+		<if test="year != null and year != ''">
+           AND `Year` = #{year}
+        </if>
+    </select>
+     <select id="adminFindByCity"  resultType="Groupschool" parameterType="java.lang.String">
+		SELECT * FROM groupschool WHERE Audit=1 AND
+		City LIKE CONCAT('%','${city}','%' ) 
+		<if test="year != null and year != ''">
+           AND `Year` = #{year}
+        </if>
+    </select>
+     <update id="updateAudit" parameterType="int">
+		UPDATE groupschool SET 
+	 	 Audit=1
+		WHERE id=#{id}
+	</update> 
+    <update id="updateGroupschool" parameterType="Groupschool">
+		UPDATE groupschool SET 
+		 Year=#{year},
+	 	 LeadVocEduGroup=#{leadvocedugroup},
+		 JoinVocEduGroup=#{joinvocedugroup},
+		 JoinLeadVocEduGroupScho=#{joinleadvocedugroupscho},
+		 JoinLeadVocEduGroupEnterp=#{joinleadvocedugroupenterp},
+		 JoinLeadVocEduGroupMajor=#{joinleadvocedugroupmajor}
+	 	
+	 		
+		WHERE id=#{id}
+	</update> 
+	
+	<delete id="deleteGroupschool" parameterType="Groupschool">
+		DELETE FROM groupschool WHERE id=#{id}
+	</delete>
+	
+	<insert id="saveGroupschool" parameterType="Groupschool">
+		INSERT INTO groupschool(
+			Admcode,
+			Year,
+			City,
+			LeadVocEduGroup,
+			JoinVocEduGroup,
+			JoinLeadVocEduGroupScho,
+			JoinLeadVocEduGroupEnterp,
+			JoinLeadVocEduGroupMajor,
+	 	 	Audit
+		)
+		VALUES(
+			#{admcode},
+			#{year},
+			#{city},
+	 	 	#{leadvocedugroup},
+	 		#{joinvocedugroup},
+	 	 	#{joinleadvocedugroupscho},
+	 	 	#{joinleadvocedugroupenterp},
+	 	 	#{joinleadvocedugroupmajor},
+	 		0
+		)	 
+	</insert>
+	 
+	 <select id="checkYear" parameterType="Groupschool" resultType="java.lang.Integer">
+		select count(*) from groupschool where Year=#{year} and Admcode=#{admcode}
+	</select>
+	
+</mapper>

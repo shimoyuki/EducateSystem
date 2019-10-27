@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.TeachersMapper">
+	<resultMap id="BaseResultMap" type="com.jks.entity.Teachers">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="Admcode" jdbcType="VARCHAR" property="admcode" />
+		<result column="Year" jdbcType="VARCHAR" property="year" />
+		<result column="City" jdbcType="VARCHAR" property="city" />
+		<result column="StaffNum" jdbcType="REAL" property="staffnum" />
+		<result column="StaffAdmin" jdbcType="REAL" property="staffadmin" />
+		<result column="StaffPrepJob" jdbcType="REAL" property="staffprepjob" />
+		<result column="FullTime" jdbcType="REAL" property="fulltime" />
+		<result column="BasicCourse" jdbcType="REAL" property="basiccourse" />
+		<result column="Course" jdbcType="REAL" property="course" />
+		<result column="IndustryEnterprise" jdbcType="REAL"
+			property="industryenterprise" />
+		<result column="UndergraLess" jdbcType="REAL" property="undergraless" />
+		<result column="Undergra" jdbcType="REAL" property="undergra" />
+		<result column="FullPostgrad" jdbcType="REAL" property="fullpostgrad" />
+		<result column="SubHighMore" jdbcType="REAL" property="subhighmore" />
+		<result column="IntermediateGrade" jdbcType="REAL" property="intermediategrade" />
+		<result column="JuniorTitle" jdbcType="REAL" property="juniortitle" />
+		<result column="NoConferTeac" jdbcType="REAL" property="noconferteac" />
+		<result column="ThreeFiveLess" jdbcType="REAL" property="threefiveless" />
+		<result column="ThreeSixFourFive" jdbcType="REAL" property="threesixfourfive" />
+		<result column="FourSixFiveFive" jdbcType="REAL" property="foursixfivefive" />
+		<result column="FiveSixMore" jdbcType="REAL" property="fivesixmore" />
+		<result column="Male" jdbcType="REAL" property="male" />
+		<result column="Female" jdbcType="REAL" property="female" />
+		<result column="DoubleTeac" jdbcType="REAL" property="doubleteac" />
+		<result column="CourseClassHour" jdbcType="DECIMAL" property="courseclasshour" />
+		<result column="InduEnterHour" jdbcType="REAL" property="induenterhour" />
+		<result column="CounselCertificate" jdbcType="REAL"
+			property="counselcertificate" />
+		<result column="FulltimeCounsel" jdbcType="REAL" property="fulltimecounsel" />
+		<result column="CityDiscipLeader" jdbcType="REAL" property="citydiscipleader" />
+		<result column="ProvSuper" jdbcType="REAL" property="provsuper" />
+		<result column="Audit" jdbcType="INTEGER" property="audit" />
+		<result column="FullClassHour" jdbcType="DECIMAL" property="fullclasshour" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, Admcode, Year, City, StaffNum, StaffAdmin, StaffPrepJob, FullTime,
+		BasicCourse,
+		Course, IndustryEnterprise, UndergraLess, Undergra, FullPostgrad,
+		SubHighMore, IntermediateGrade,
+		JuniorTitle, NoConferTeac, ThreeFiveLess, ThreeSixFourFive, FourSixFiveFive,
+		FiveSixMore,
+		Male, Female, DoubleTeac, CourseClassHour, InduEnterHour,
+		CounselCertificate,
+		FulltimeCounsel, CityDiscipLeader, ProvSuper, Audit, FullClassHour
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from teachers
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="selectByYear" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from teachers
+		where Year = #{year,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from teachers
+	</select>
+	<select id="query" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from teachers where 1=1
+		<if test="year!= null">and year=#{year,jdbcType=VARCHAR}</if>
+		<if test="admcode!= null">and admcode=#{admcode,jdbcType=VARCHAR}</if>
+		<if test="city!= null">and city like #{city,jdbcType=VARCHAR}</if>
+		<if test="audit!= null">and audit=#{audit,jdbcType=INTEGER}</if>
+	</select>
+	<select id="selectAdmcodeByCity" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select Admcode
+		from teachers
+		where city like #{city,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from teachers
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.jks.entity.Teachers">
+		insert into teachers (ID, Admcode, Year,
+		City, StaffNum, StaffAdmin,
+		StaffPrepJob, FullTime, BasicCourse,
+		Course, IndustryEnterprise, UndergraLess,
+		Undergra, FullPostgrad, SubHighMore,
+		IntermediateGrade, JuniorTitle, NoConferTeac,
+		ThreeFiveLess, ThreeSixFourFive, FourSixFiveFive,
+		FiveSixMore, Male, Female, DoubleTeac,
+		CourseClassHour, InduEnterHour,
+		CounselCertificate, FulltimeCounsel, CityDiscipLeader,
+		ProvSuper, Audit, FullClassHour
+		)
+		values (#{id,jdbcType=INTEGER}, #{admcode,jdbcType=VARCHAR},
+		#{year,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR}, #{staffnum,jdbcType=REAL}, #{staffadmin,jdbcType=REAL},
+		#{staffprepjob,jdbcType=REAL}, #{fulltime,jdbcType=REAL},
+		#{basiccourse,jdbcType=REAL},
+		#{course,jdbcType=REAL}, #{industryenterprise,jdbcType=REAL}, #{undergraless,jdbcType=REAL},
+		#{undergra,jdbcType=REAL}, #{fullpostgrad,jdbcType=REAL},
+		#{subhighmore,jdbcType=REAL},
+		#{intermediategrade,jdbcType=REAL}, #{juniortitle,jdbcType=REAL}, #{noconferteac,jdbcType=REAL},
+		#{threefiveless,jdbcType=REAL}, #{threesixfourfive,jdbcType=REAL},
+		#{foursixfivefive,jdbcType=REAL},
+		#{fivesixmore,jdbcType=REAL}, #{male,jdbcType=REAL}, #{female,jdbcType=REAL},
+		#{doubleteac,jdbcType=REAL},
+		#{courseclasshour,jdbcType=DECIMAL}, #{induenterhour,jdbcType=REAL},
+		#{counselcertificate,jdbcType=REAL}, #{fulltimecounsel,jdbcType=REAL},
+		#{citydiscipleader,jdbcType=REAL},
+		#{provsuper,jdbcType=REAL}, #{audit,jdbcType=INTEGER}, #{fullclasshour,jdbcType=DECIMAL}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.jks.entity.Teachers">
+		insert into teachers
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="admcode != null">
+				Admcode,
+			</if>
+			<if test="year != null">
+				Year,
+			</if>
+			<if test="city != null">
+				City,
+			</if>
+			<if test="staffnum != null">
+				StaffNum,
+			</if>
+			<if test="staffadmin != null">
+				StaffAdmin,
+			</if>
+			<if test="staffprepjob != null">
+				StaffPrepJob,
+			</if>
+			<if test="fulltime != null">
+				FullTime,
+			</if>
+			<if test="basiccourse != null">
+				BasicCourse,
+			</if>
+			<if test="course != null">
+				Course,
+			</if>
+			<if test="industryenterprise != null">
+				IndustryEnterprise,
+			</if>
+			<if test="undergraless != null">
+				UndergraLess,
+			</if>
+			<if test="undergra != null">
+				Undergra,
+			</if>
+			<if test="fullpostgrad != null">
+				FullPostgrad,
+			</if>
+			<if test="subhighmore != null">
+				SubHighMore,
+			</if>
+			<if test="intermediategrade != null">
+				IntermediateGrade,
+			</if>
+			<if test="juniortitle != null">
+				JuniorTitle,
+			</if>
+			<if test="noconferteac != null">
+				NoConferTeac,
+			</if>
+			<if test="threefiveless != null">
+				ThreeFiveLess,
+			</if>
+			<if test="threesixfourfive != null">
+				ThreeSixFourFive,
+			</if>
+			<if test="foursixfivefive != null">
+				FourSixFiveFive,
+			</if>
+			<if test="fivesixmore != null">
+				FiveSixMore,
+			</if>
+			<if test="male != null">
+				Male,
+			</if>
+			<if test="female != null">
+				Female,
+			</if>
+			<if test="doubleteac != null">
+				DoubleTeac,
+			</if>
+			<if test="courseclasshour != null">
+				CourseClassHour,
+			</if>
+			<if test="induenterhour != null">
+				InduEnterHour,
+			</if>
+			<if test="counselcertificate != null">
+				CounselCertificate,
+			</if>
+			<if test="fulltimecounsel != null">
+				FulltimeCounsel,
+			</if>
+			<if test="citydiscipleader != null">
+				CityDiscipLeader,
+			</if>
+			<if test="provsuper != null">
+				ProvSuper,
+			</if>
+			<if test="audit != null">
+				Audit,
+			</if>
+			<if test="fullclasshour != null">
+				FullClassHour,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="admcode != null">
+				#{admcode,jdbcType=VARCHAR},
+			</if>
+			<if test="year != null">
+				#{year,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				#{city,jdbcType=VARCHAR},
+			</if>
+			<if test="staffnum != null">
+				#{staffnum,jdbcType=REAL},
+			</if>
+			<if test="staffadmin != null">
+				#{staffadmin,jdbcType=REAL},
+			</if>
+			<if test="staffprepjob != null">
+				#{staffprepjob,jdbcType=REAL},
+			</if>
+			<if test="fulltime != null">
+				#{fulltime,jdbcType=REAL},
+			</if>
+			<if test="basiccourse != null">
+				#{basiccourse,jdbcType=REAL},
+			</if>
+			<if test="course != null">
+				#{course,jdbcType=REAL},
+			</if>
+			<if test="industryenterprise != null">
+				#{industryenterprise,jdbcType=REAL},
+			</if>
+			<if test="undergraless != null">
+				#{undergraless,jdbcType=REAL},
+			</if>
+			<if test="undergra != null">
+				#{undergra,jdbcType=REAL},
+			</if>
+			<if test="fullpostgrad != null">
+				#{fullpostgrad,jdbcType=REAL},
+			</if>
+			<if test="subhighmore != null">
+				#{subhighmore,jdbcType=REAL},
+			</if>
+			<if test="intermediategrade != null">
+				#{intermediategrade,jdbcType=REAL},
+			</if>
+			<if test="juniortitle != null">
+				#{juniortitle,jdbcType=REAL},
+			</if>
+			<if test="noconferteac != null">
+				#{noconferteac,jdbcType=REAL},
+			</if>
+			<if test="threefiveless != null">
+				#{threefiveless,jdbcType=REAL},
+			</if>
+			<if test="threesixfourfive != null">
+				#{threesixfourfive,jdbcType=REAL},
+			</if>
+			<if test="foursixfivefive != null">
+				#{foursixfivefive,jdbcType=REAL},
+			</if>
+			<if test="fivesixmore != null">
+				#{fivesixmore,jdbcType=REAL},
+			</if>
+			<if test="male != null">
+				#{male,jdbcType=REAL},
+			</if>
+			<if test="female != null">
+				#{female,jdbcType=REAL},
+			</if>
+			<if test="doubleteac != null">
+				#{doubleteac,jdbcType=REAL},
+			</if>
+			<if test="courseclasshour != null">
+				#{courseclasshour,jdbcType=DECIMAL},
+			</if>
+			<if test="induenterhour != null">
+				#{induenterhour,jdbcType=REAL},
+			</if>
+			<if test="counselcertificate != null">
+				#{counselcertificate,jdbcType=REAL},
+			</if>
+			<if test="fulltimecounsel != null">
+				#{fulltimecounsel,jdbcType=REAL},
+			</if>
+			<if test="citydiscipleader != null">
+				#{citydiscipleader,jdbcType=REAL},
+			</if>
+			<if test="provsuper != null">
+				#{provsuper,jdbcType=REAL},
+			</if>
+			<if test="audit != null">
+				#{audit,jdbcType=INTEGER},
+			</if>
+			<if test="fullclasshour != null">
+				#{fullclasshour,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.jks.entity.Teachers">
+		update teachers
+		<set>
+			<if test="admcode != null">
+				Admcode = #{admcode,jdbcType=VARCHAR},
+			</if>
+			<if test="year != null">
+				Year = #{year,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				City = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="staffnum != null">
+				StaffNum = #{staffnum,jdbcType=REAL},
+			</if>
+			<if test="staffadmin != null">
+				StaffAdmin = #{staffadmin,jdbcType=REAL},
+			</if>
+			<if test="staffprepjob != null">
+				StaffPrepJob = #{staffprepjob,jdbcType=REAL},
+			</if>
+			<if test="fulltime != null">
+				FullTime = #{fulltime,jdbcType=REAL},
+			</if>
+			<if test="basiccourse != null">
+				BasicCourse = #{basiccourse,jdbcType=REAL},
+			</if>
+			<if test="course != null">
+				Course = #{course,jdbcType=REAL},
+			</if>
+			<if test="industryenterprise != null">
+				IndustryEnterprise = #{industryenterprise,jdbcType=REAL},
+			</if>
+			<if test="undergraless != null">
+				UndergraLess = #{undergraless,jdbcType=REAL},
+			</if>
+			<if test="undergra != null">
+				Undergra = #{undergra,jdbcType=REAL},
+			</if>
+			<if test="fullpostgrad != null">
+				FullPostgrad = #{fullpostgrad,jdbcType=REAL},
+			</if>
+			<if test="subhighmore != null">
+				SubHighMore = #{subhighmore,jdbcType=REAL},
+			</if>
+			<if test="intermediategrade != null">
+				IntermediateGrade = #{intermediategrade,jdbcType=REAL},
+			</if>
+			<if test="juniortitle != null">
+				JuniorTitle = #{juniortitle,jdbcType=REAL},
+			</if>
+			<if test="noconferteac != null">
+				NoConferTeac = #{noconferteac,jdbcType=REAL},
+			</if>
+			<if test="threefiveless != null">
+				ThreeFiveLess = #{threefiveless,jdbcType=REAL},
+			</if>
+			<if test="threesixfourfive != null">
+				ThreeSixFourFive = #{threesixfourfive,jdbcType=REAL},
+			</if>
+			<if test="foursixfivefive != null">
+				FourSixFiveFive = #{foursixfivefive,jdbcType=REAL},
+			</if>
+			<if test="fivesixmore != null">
+				FiveSixMore = #{fivesixmore,jdbcType=REAL},
+			</if>
+			<if test="male != null">
+				Male = #{male,jdbcType=REAL},
+			</if>
+			<if test="female != null">
+				Female = #{female,jdbcType=REAL},
+			</if>
+			<if test="doubleteac != null">
+				DoubleTeac = #{doubleteac,jdbcType=REAL},
+			</if>
+			<if test="courseclasshour != null">
+				CourseClassHour = #{courseclasshour,jdbcType=DECIMAL},
+			</if>
+			<if test="induenterhour != null">
+				InduEnterHour = #{induenterhour,jdbcType=REAL},
+			</if>
+			<if test="counselcertificate != null">
+				CounselCertificate = #{counselcertificate,jdbcType=REAL},
+			</if>
+			<if test="fulltimecounsel != null">
+				FulltimeCounsel = #{fulltimecounsel,jdbcType=REAL},
+			</if>
+			<if test="citydiscipleader != null">
+				CityDiscipLeader = #{citydiscipleader,jdbcType=REAL},
+			</if>
+			<if test="provsuper != null">
+				ProvSuper = #{provsuper,jdbcType=REAL},
+			</if>
+			<if test="audit != null">
+				Audit = #{audit,jdbcType=INTEGER},
+			</if>
+			<if test="fullclasshour != null">
+				FullClassHour = #{fullclasshour,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.jks.entity.Teachers">
+		update teachers
+		set Admcode = #{admcode,jdbcType=VARCHAR},
+		Year = #{year,jdbcType=VARCHAR},
+		City = #{city,jdbcType=VARCHAR},
+		StaffNum = #{staffnum,jdbcType=REAL},
+		StaffAdmin = #{staffadmin,jdbcType=REAL},
+		StaffPrepJob = #{staffprepjob,jdbcType=REAL},
+		FullTime = #{fulltime,jdbcType=REAL},
+		BasicCourse = #{basiccourse,jdbcType=REAL},
+		Course = #{course,jdbcType=REAL},
+		IndustryEnterprise = #{industryenterprise,jdbcType=REAL},
+		UndergraLess = #{undergraless,jdbcType=REAL},
+		Undergra = #{undergra,jdbcType=REAL},
+		FullPostgrad = #{fullpostgrad,jdbcType=REAL},
+		SubHighMore = #{subhighmore,jdbcType=REAL},
+		IntermediateGrade = #{intermediategrade,jdbcType=REAL},
+		JuniorTitle = #{juniortitle,jdbcType=REAL},
+		NoConferTeac = #{noconferteac,jdbcType=REAL},
+		ThreeFiveLess = #{threefiveless,jdbcType=REAL},
+		ThreeSixFourFive = #{threesixfourfive,jdbcType=REAL},
+		FourSixFiveFive = #{foursixfivefive,jdbcType=REAL},
+		FiveSixMore = #{fivesixmore,jdbcType=REAL},
+		Male = #{male,jdbcType=REAL},
+		Female = #{female,jdbcType=REAL},
+		DoubleTeac = #{doubleteac,jdbcType=REAL},
+		CourseClassHour = #{courseclasshour,jdbcType=DECIMAL},
+		InduEnterHour = #{induenterhour,jdbcType=REAL},
+		CounselCertificate = #{counselcertificate,jdbcType=REAL},
+		FulltimeCounsel = #{fulltimecounsel,jdbcType=REAL},
+		CityDiscipLeader = #{citydiscipleader,jdbcType=REAL},
+		ProvSuper = #{provsuper,jdbcType=REAL},
+		Audit = #{audit,jdbcType=INTEGER},
+		FullClassHour = #{fullclasshour,jdbcType=DECIMAL}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

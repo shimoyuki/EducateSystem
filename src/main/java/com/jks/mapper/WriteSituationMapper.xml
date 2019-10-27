@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jks.dao.WriteSituationDao">
+	<select id="getWriteSituation"  resultType="WriteSituation" parameterType="java.lang.String">
+		SELECT * FROM 
+			AuditView  
+		WHERE 
+			SchoolName LIKE CONCAT('%','${school}','%' )				      
+        AND 
+        	Year = #{year}            	         
+	</select>
+	
+	<select id="getWriteSituationNull"  resultType="WriteSituation" parameterType="java.lang.String">
+		SELECT distinct SchoolName FROM 
+			AuditView
+		WHERE 
+			SchoolName LIKE CONCAT('%','${_parameter}','%' )  		        	         
+	</select>
+</mapper>
